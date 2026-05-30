@@ -1,0 +1,150 @@
+/* ═══════════════════════════════════════════
+   base.css — Design Tokens, Reset, Animations
+═══════════════════════════════════════════ */
+
+/* ── Design Tokens ── */
+:root {
+  /* Backgrounds */
+  --bg:   #f8fafc;
+  --bg2:  #ffffff;
+  --bg3:  #ffffff;
+  --bg4:  #e2e8f0;
+
+  /* Brand Colors */
+  --teal:    #0d9488;  /* লাইট মোডের জন্য ডার্ক ও রিডেবল টিল কালার */
+  --teal2:   #14b8a6;  /* সেকেন্ডারি ভাইব্রেন্ট টিল */
+  --teal3:   rgba(13, 148, 136, 0.08); /* হালকা টিল টিন্ট */
+  --emerald: #059669;
+  --cyan:    #06b6d4;
+  --amber:   #d97706;
+  --coral:   #e11d48;
+  --purple:  #4f46e5;
+  --pink:    #db2777;
+
+  /* Glass / Border */
+--glass:   rgba(255, 255, 255, 0.75); /* ক্রিস্টাল গ্লাস ইফেক্ট */
+  --glass2:  rgba(241, 245, 249, 0.85);
+  --border:  rgba(15, 23, 42, 0.08);    /* হালকা সফট বর্ডার */
+  --border2: rgba(13, 148, 136, 0.2);
+
+  /* Text */
+  --text1: #0f172a;  /* প্রধান লেখার রঙ (গাঢ় চারকোল স্লেট) */
+  --text2: #475569;  /* সাব-টাইটেল বা সেকেন্ডারি টেক্সট (মিডিয়াম ধূসর) */
+  --text3: #94a3b8;  /* মিউটেড বা প্লেসহোল্ডার টেক্সট */
+
+  /* Typography */
+  --font:    'Space Grotesk', sans-serif;
+  --display: 'Syne', sans-serif;
+}
+
+/* ── Reset ── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text1);
+  font-family: var(--font);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: var(--font);
+  cursor: pointer;
+}
+
+input, select, textarea {
+  font-family: var(--font);
+}
+
+/* ── Scrollbars ── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,212,170,.2) transparent;
+}
+*::-webkit-scrollbar { width: 4px; height: 4px; }
+*::-webkit-scrollbar-thumb { background: rgba(0,212,170,.2); border-radius: 4px; }
+
+/* ── App Shell ── */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  max-width: 430px;
+  margin: 0 auto;
+}
+
+/* ── Particles ── */
+.particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  animation: float linear infinite;
+}
+
+/* ── Screen ── */
+.screen {
+  display: none;
+  flex-direction: column;
+  min-height: 100vh;
+  animation: fadeIn .35s ease;
+}
+.screen.active {
+  display: flex;
+}
+
+.content {
+  flex: 1;
+  padding: 20px 20px 100px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Animations ── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+  10%  { opacity: .4; }
+  90%  { opacity: .1; }
+  100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+
+@keyframes pulse2 {
+  0%, 100% { transform: scale(1); opacity: .6; }
+  50%       { transform: scale(1.1); opacity: 1; }
+}
+
+@keyframes typing {
+  0%, 60%, 100% { transform: translateY(0); }
+  30%           { transform: translateY(-4px); }
+}
+
+@keyframes fabPulse {
+  0%, 100% { box-shadow: 0 4px 24px rgba(0,212,170,.45), 0 0 0 0 rgba(0,212,170,.3); }
+  50%       { box-shadow: 0 4px 32px rgba(0,212,170,.6), 0 0 0 8px rgba(0,212,170,.05); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}

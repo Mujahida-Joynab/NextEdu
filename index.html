@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NextEdu — AI-Powered Learning</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/screens.css">
+  <link rel="stylesheet" href="css/provenance.css">
+</head>
+<body>
+<div class="app" id="app">
+
+  <!-- Floating particles background -->
+  
+  
+        
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-sans); color: var(--color-text-primary); }
+  .prov-root { padding: 1.5rem 0; }
+  .section { margin-bottom: 2rem; }
+  .section-header { display: flex; align-items: center; gap: 8px; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .section-title { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); letter-spacing: 0.06em; text-transform: uppercase; }
+  .badge { font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 500; }
+  .badge-judge { background: #EEEDFE; color: #3C3489; }
+  .badge-team { background: #E1F5EE; color: #085041; }
+  .card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.25rem; margin-bottom: 0.75rem; }
+  .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .field-group { display: flex; flex-direction: column; gap: 6px; }
+  .field-label { font-size: 12px; color: var(--color-text-secondary); font-weight: 500; display: flex; align-items: center; gap: 5px; }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 6px; min-height: 32px; }
+  .tag { background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); border-radius: 20px; padding: 4px 12px; font-size: 12px; color: var(--color-text-primary); display: flex; align-items: center; gap: 5px; }
+  .tag .remove { cursor: pointer; color: var(--color-text-tertiary); font-size: 14px; line-height: 1; }
+  .tag .remove:hover { color: var(--color-text-danger); }
+  .tag-input-wrap { display: flex; gap: 6px; margin-top: 6px; }
+  .tag-input-wrap input { flex: 1; font-size: 13px; padding: 6px 10px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); background: var(--color-background-primary); color: var(--color-text-primary); outline: none; }
+  .tag-input-wrap input:focus { border-color: #818cf8; }
+  .tag-input-wrap button { font-size: 12px; padding: 6px 12px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); background: var(--color-background-secondary); color: var(--color-text-primary); cursor: pointer; white-space: nowrap; }
+  .tag-input-wrap button:hover { background: var(--color-background-tertiary); }
+  textarea { width: 100%; font-size: 13px; padding: 10px 12px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); background: var(--color-background-primary); color: var(--color-text-primary); outline: none; resize: vertical; font-family: var(--font-sans); line-height: 1.6; min-height: 80px; }
+  textarea:focus { border-color: #818cf8; }
+  select { width: 100%; font-size: 13px; padding: 8px 10px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); background: var(--color-background-primary); color: var(--color-text-primary); outline: none; cursor: pointer; }
+  select:focus { border-color: #818cf8; }
+  .rai-score-wrap { display: flex; align-items: center; gap: 12px; margin-top: 8px; }
+  .rai-bar-bg { flex: 1; height: 6px; background: var(--color-background-secondary); border-radius: 99px; overflow: hidden; }
+  .rai-bar-fill { height: 100%; border-radius: 99px; transition: width 0.5s ease; }
+  .rai-score-num { font-size: 22px; font-weight: 500; min-width: 42px; text-align: right; }
+  .mcp-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+  .mcp-row input { font-size: 13px; padding: 7px 10px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); background: var(--color-background-primary); color: var(--color-text-primary); outline: none; }
+  .mcp-row input:focus { border-color: #818cf8; }
+  .add-btn { font-size: 12px; padding: 6px 12px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); background: var(--color-background-secondary); color: var(--color-text-primary); cursor: pointer; display: flex; align-items: center; gap: 5px; }
+  .add-btn:hover { background: var(--color-background-tertiary); }
+  .prompt-card { background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 12px 14px; margin-bottom: 8px; }
+  .prompt-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+  .prompt-title { font-size: 13px; font-weight: 500; }
+  .prompt-type-badge { font-size: 10px; padding: 2px 8px; border-radius: 20px; font-weight: 500; }
+  .prompt-content-preview { font-size: 12px; color: var(--color-text-secondary); font-family: var(--font-mono); line-height: 1.5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .active-dot { width: 7px; height: 7px; border-radius: 50%; background: #1D9E75; display: inline-block; margin-right: 4px; }
+  .save-btn { width: 100%; padding: 12px; border: none; border-radius: var(--border-radius-md); background: #818cf8; color: white; font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.2s, transform 0.1s; }
+  .save-btn:hover { background: #6d75e0; }
+  .save-btn:active { transform: scale(0.99); }
+  .save-btn:disabled { background: var(--color-background-secondary); color: var(--color-text-tertiary); cursor: not-allowed; }
+  .toast { position: fixed; bottom: 20px; right: 20px; background: #1D9E75; color: white; border-radius: var(--border-radius-md); padding: 10px 18px; font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 8px; opacity: 0; transform: translateY(8px); transition: all 0.3s; z-index: 999; pointer-events: none; }
+  .toast.show { opacity: 1; transform: translateY(0); }
+  .audit-row { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 0.5px solid var(--color-border-tertiary); font-size: 13px; }
+  .audit-row:last-child { border-bottom: none; }
+  .audit-action { font-weight: 500; min-width: 140px; color: var(--color-text-primary); }
+  .audit-detail { color: var(--color-text-secondary); flex: 1; }
+  .audit-time { color: var(--color-text-tertiary); font-size: 11px; white-space: nowrap; }
+  .perm-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .perm-row input { flex: 1; font-size: 13px; padding: 7px 10px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); background: var(--color-background-primary); color: var(--color-text-primary); outline: none; }
+  .perm-toggle { position: relative; width: 36px; height: 20px; flex-shrink: 0; }
+  .perm-toggle input { opacity: 0; width: 0; height: 0; }
+  .perm-slider { position: absolute; inset: 0; background: var(--color-background-secondary); border-radius: 20px; cursor: pointer; border: 0.5px solid var(--color-border-secondary); transition: 0.2s; }
+  .perm-slider::after { content: ''; position: absolute; width: 14px; height: 14px; background: white; border-radius: 50%; top: 2px; left: 2px; transition: 0.2s; }
+  .perm-toggle input:checked + .perm-slider { background: #818cf8; border-color: #818cf8; }
+  .perm-toggle input:checked + .perm-slider::after { transform: translateX(16px); }
+  .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1rem; }
+  .stat-card { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 14px; text-align: center; }
+  .stat-num { font-size: 24px; font-weight: 500; color: var(--color-text-primary); }
+  .stat-label { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
+  .section-tabs { display: flex; gap: 0; border-bottom: 0.5px solid var(--color-border-tertiary); margin-bottom: 1.5rem; }
+  .tab-btn { padding: 10px 18px; font-size: 13px; font-weight: 500; border: none; background: none; color: var(--color-text-secondary); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -0.5px; transition: all 0.15s; }
+  .tab-btn.active { color: #818cf8; border-bottom-color: #818cf8; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+  .connecting { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--color-text-secondary); padding: 1rem; }
+  .spin { width: 14px; height: 14px; border: 2px solid var(--color-border-tertiary); border-top-color: #818cf8; border-radius: 50%; animation: spin 0.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .supabase-chip { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: #1D9E75; background: #E1F5EE; border-radius: 20px; padding: 3px 10px; font-weight: 500; }
+</style>
+<div class="screen" id="screen-provenance" style="display: none; width: 100%;">
+  <div class="prov-root">
+    <h2 class="sr-only">Provenance Transparency and Auditability dashboard for NextEdu</h2>
+
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem; padding: 0 10px;">
+      <div>
+        <p style="font-size:18px; font-weight:600; color: var(--text1);">Provenance & Transparency</p>
+        <p style="font-size:13px; color:var(--text2); margin-top:2px;">Track data sources, AI models, and responsible AI practices</p>
+      </div>
+      <span class="supabase-chip"><i class="ti ti-database" style="font-size:13px;" aria-hidden="true"></i> Supabase</span>
+    </div>
+
+    <div id="loading-state" class="connecting"><div class="spin"></div> Connecting to Supabase...</div>
+
+    <div id="prov-dashboard-content" style="display:none; padding: 0 10px;">
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="stat-num" id="stat-sources">0</div>
+          <div class="stat-label">Data sources</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat-models">0</div>
+          <div class="stat-label">AI models</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="stat-rai" style="color:#818cf8;">0</div>
+          <div class="stat-label">RAI score</div>
+        </div>
+      </div>
+
+      <div class="section-tabs">
+        <button class="tab-btn active" onclick="switchTab('data')">Data & AI</button>
+        <button class="tab-btn" onclick="switchTab('tooling')">Tooling & IDE</button>
+        <button class="tab-btn" onclick="switchTab('mcp')">MCP Usage</button>
+        <button class="tab-btn" onclick="switchTab('prompts')">Prompt Library</button>
+        <button class="tab-btn" onclick="switchTab('audit')">Audit Log</button>
+      </div>
+    <!-- DATA & AI TAB -->
+    <div class="tab-panel active" id="tab-data">
+      <div class="section-header">
+        <i class="ti ti-database" aria-hidden="true" style="font-size:16px; color:#818cf8;"></i>
+        <span class="section-title">Data sources</span>
+        <span class="badge badge-judge">Judge + Admin</span>
+      </div>
+      <div class="card">
+        <div class="field-group">
+          <div class="field-label"><i class="ti ti-server" aria-hidden="true"></i> APIs, datasets, scraped data...</div>
+          <div class="tag-list" id="sources-list"></div>
+          <div class="tag-input-wrap">
+            <input type="text" id="source-input" placeholder="e.g. NCTB Dataset, OpenAlex API..." />
+            <button onclick="addTag('sources')"><i class="ti ti-plus" aria-hidden="true"></i> Add</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-header" style="margin-top:1.5rem;">
+        <i class="ti ti-brain" aria-hidden="true" style="font-size:16px; color:#818cf8;"></i>
+        <span class="section-title">AI models</span>
+        <span class="badge badge-judge">Judge + Admin</span>
+      </div>
+      <div class="card">
+        <div class="field-group">
+          <div class="field-label"><i class="ti ti-cpu" aria-hidden="true"></i> Models used in this project</div>
+          <div class="tag-list" id="models-list"></div>
+          <div class="tag-input-wrap">
+            <input type="text" id="model-input" placeholder="e.g. claude-sonnet-4-20250514..." />
+            <button onclick="addTag('models')"><i class="ti ti-plus" aria-hidden="true"></i> Add</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-header" style="margin-top:1.5rem;">
+        <i class="ti ti-shield-check" aria-hidden="true" style="font-size:16px; color:#818cf8;"></i>
+        <span class="section-title">Responsible AI practices</span>
+        <span class="badge badge-judge">Judge + Admin</span>
+      </div>
+      <div class="card">
+        <div class="field-group">
+          <div class="field-label"><i class="ti ti-notes" aria-hidden="true"></i> Bias mitigation, transparency measures, fairness approaches</div>
+          <textarea id="rai-text" placeholder="Describe your responsible AI practices..."></textarea>
+          <div class="rai-score-wrap">
+            <span style="font-size:12px; color:var(--color-text-secondary);">RAI score</span>
+            <div class="rai-bar-bg"><div class="rai-bar-fill" id="rai-bar" style="width:0%; background:#818cf8;"></div></div>
+            <span class="rai-score-num" id="rai-score-display" style="color:#818cf8;">0</span>
+            <input type="range" min="0" max="100" value="0" id="rai-slider" style="width:80px;" oninput="updateRaiScore(this.value)" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOOLING TAB -->
+    <div class="tab-panel" id="tab-tooling">
+      <div class="section-header">
+        <i class="ti ti-tool" aria-hidden="true" style="font-size:16px; color:#1D9E75;"></i>
+        <span class="section-title">Tooling & IDE</span>
+        <span class="badge badge-team">Team only</span>
+      </div>
+      <div class="card">
+        <div class="field-grid">
+          <div class="field-group">
+            <div class="field-label"><i class="ti ti-code" aria-hidden="true"></i> IDE / Editor</div>
+            <select id="ide-select">
+              <option value="">Select IDE...</option>
+              <option value="VS Code">VS Code</option>
+              <option value="Cursor">Cursor</option>
+              <option value="JetBrains">JetBrains</option>
+              <option value="Neovim">Neovim</option>
+              <option value="Windsurf">Windsurf</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <div class="field-label"><i class="ti ti-cloud-upload" aria-hidden="true"></i> Deployment method</div>
+            <input type="text" id="deploy-input" placeholder="Vercel, AWS, Docker..." style="font-size:13px; padding:8px 10px; border:0.5px solid var(--color-border-secondary); border-radius:var(--border-radius-md); background:var(--color-background-primary); color:var(--color-text-primary); outline:none;" />
+          </div>
+        </div>
+
+        <div class="field-group" style="margin-top:1rem;">
+          <div class="field-label"><i class="ti ti-package" aria-hidden="true"></i> Frameworks & libraries</div>
+          <div class="tag-list" id="frameworks-list"></div>
+          <div class="tag-input-wrap">
+            <input type="text" id="framework-input" placeholder="React, Supabase, LangChain..." />
+            <button onclick="addTag('frameworks')"><i class="ti ti-plus" aria-hidden="true"></i> Add</button>
+          </div>
+        </div>
+
+        <div class="field-group" style="margin-top:1rem;">
+          <div class="field-label"><i class="ti ti-file-text" aria-hidden="true"></i> Context / memory files</div>
+          <div class="tag-list" id="context-list"></div>
+          <div class="tag-input-wrap">
+            <input type="text" id="context-input" placeholder=".cursorrules, CLAUDE.md..." />
+            <button onclick="addTag('context')"><i class="ti ti-plus" aria-hidden="true"></i> Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MCP TAB -->
+    <div class="tab-panel" id="tab-mcp">
+      <div class="section-header">
+        <i class="ti ti-plug" aria-hidden="true" style="font-size:16px; color:#f59e0b;"></i>
+        <span class="section-title">MCP usage</span>
+        <span class="badge badge-team">Team only</span>
+      </div>
+
+      <div class="card">
+        <div class="field-label" style="margin-bottom:8px;"><i class="ti ti-server-2" aria-hidden="true"></i> MCP servers</div>
+        <div id="mcp-servers-list"></div>
+        <button class="add-btn" onclick="addMcpServer()"><i class="ti ti-plus" aria-hidden="true"></i> Add server</button>
+      </div>
+
+      <div class="card" style="margin-top:0.75rem;">
+        <div class="field-group">
+          <div class="field-label"><i class="ti ti-tools" aria-hidden="true"></i> Tools exposed via MCP</div>
+          <div class="tag-list" id="tools-list"></div>
+          <div class="tag-input-wrap">
+            <input type="text" id="tool-input" placeholder="e.g. generate_quiz, search_nctb..." />
+            <button onclick="addTag('tools')"><i class="ti ti-plus" aria-hidden="true"></i> Add</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:0.75rem;">
+        <div class="field-label" style="margin-bottom:8px;"><i class="ti ti-lock" aria-hidden="true"></i> Permissions granted</div>
+        <div id="permissions-list"></div>
+        <button class="add-btn" onclick="addPermission()"><i class="ti ti-plus" aria-hidden="true"></i> Add permission</button>
+      </div>
+    </div>
+
+    <!-- PROMPTS TAB -->
+    <div class="tab-panel" id="tab-prompts">
+      <div class="section-header">
+        <i class="ti ti-message-code" aria-hidden="true" style="font-size:16px; color:#f472b6;"></i>
+        <span class="section-title">Prompt library</span>
+        <span class="badge badge-team">Team only</span>
+      </div>
+      <div id="prompts-list"></div>
+      <button class="add-btn" onclick="openNewPrompt()" style="margin-top:0.5rem;"><i class="ti ti-plus" aria-hidden="true"></i> New prompt</button>
+      <div id="new-prompt-form" style="display:none; margin-top:1rem;" class="card">
+        <div class="field-group" style="gap:8px;">
+          <input type="text" id="np-title" placeholder="Prompt title..." style="font-size:13px; padding:8px 10px; border:0.5px solid var(--color-border-secondary); border-radius:var(--border-radius-md); background:var(--color-background-primary); color:var(--color-text-primary); outline:none;" />
+          <select id="np-type" style="font-size:13px; padding:8px 10px; border:0.5px solid var(--color-border-secondary); border-radius:var(--border-radius-md); background:var(--color-background-primary); color:var(--color-text-primary); outline:none;">
+            <option value="system">System prompt</option>
+            <option value="user">User prompt</option>
+          </select>
+          <textarea id="np-content" placeholder="Prompt content..." style="min-height:100px;"></textarea>
+          <div style="display:flex; gap:8px; justify-content:flex-end;">
+            <button onclick="cancelNewPrompt()" style="font-size:13px; padding:7px 14px; border:0.5px solid var(--color-border-secondary); border-radius:var(--border-radius-md); background:var(--color-background-secondary); color:var(--color-text-primary); cursor:pointer;">Cancel</button>
+            <button onclick="saveNewPrompt()" style="font-size:13px; padding:7px 14px; border:none; border-radius:var(--border-radius-md); background:#818cf8; color:white; cursor:pointer; font-weight:500;">Save prompt</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AUDIT TAB -->
+    <div class="tab-panel" id="tab-audit">
+      <div class="section-header">
+        <i class="ti ti-history" aria-hidden="true" style="font-size:16px; color:var(--color-text-secondary);"></i>
+        <span class="section-title">Audit log</span>
+      </div>
+      <div class="card">
+        <div id="audit-list"><div class="connecting"><div class="spin"></div> Loading audit log...</div></div>
+      </div>
+    </div>
+
+    <div style="margin-top:2rem;">
+      <button class="save-btn" id="save-btn" onclick="saveProvenance()">
+        <i class="ti ti-device-floppy" aria-hidden="true"></i>
+        Save provenance record
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const SUPABASE_URL = 'https://yrwfxfumkuowolshahte.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_w4WnMs3TJLBBLLTSmprZlg_elNiAtUU';
+const USER_ID = 'de7835fd-93c2-474f-8014-0c957241ee06';
+
+const state = {
+  sources: [], models: [], frameworks: [], contextFiles: [],
+  tools: [], mcpServers: [], permissions: [],
+  raiText: '', raiScore: 0, ide: '', deployment: '',
+  provenanceId: null, prompts: []
+};
+
+async function sbFetch(path, opts = {}) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+    headers: {
+      'apikey': SUPABASE_KEY,
+      'Authorization': `Bearer ${SUPABASE_KEY}`,
+      'Content-Type': 'application/json',
+      'Prefer': opts.prefer || 'return=representation',
+      ...opts.headers
+    },
+    ...opts
+  });
+  if (!res.ok) { const e = await res.text(); throw new Error(e); }
+  return res.json().catch(() => null);
+}
+
+async function init() {
+  try {
+    const [prov, prompts, audit] = await Promise.all([
+      sbFetch(`provenance?user_id=eq.${USER_ID}&limit=1`),
+      sbFetch(`prompts?user_id=eq.${USER_ID}&order=created_at.desc`),
+      sbFetch(`audit_log?user_id=eq.${USER_ID}&order=created_at.desc&limit=10`)
+    ]);
+
+    if (prov && prov.length) {
+      const p = prov[0];
+      state.provenanceId = p.id;
+      state.sources = p.data_sources || [];
+      state.models = p.ai_models || [];
+      state.frameworks = p.frameworks || [];
+      state.contextFiles = p.context_files || [];
+      state.tools = p.tools_exposed || [];
+      state.raiText = p.rai_practices || '';
+      state.raiScore = p.rai_score || 0;
+      state.ide = p.ide || '';
+      state.deployment = p.deployment || '';
+      state.mcpServers = Array.isArray(p.mcp_servers) ? p.mcp_servers : [];
+      try { state.permissions = p.permissions ? Object.entries(p.permissions).map(([k,v]) => ({name:k,granted:v})) : []; } catch(e) { state.permissions = []; }
+    } else {
+      state.sources = ['NCTB Curriculum Dataset', 'OpenAlex API', 'Supabase DB'];
+      state.models = ['claude-sonnet-4-20250514'];
+      state.frameworks = ['React', 'Supabase', 'Next.js'];
+      state.contextFiles = ['CLAUDE.md', '.cursorrules'];
+      state.tools = ['generate_quiz', 'search_nctb'];
+      state.raiScore = 72;
+      state.raiText = 'Bias mitigation via diverse curriculum sources. Student data anonymized. No PII in AI prompts. Regular fairness audits on quiz generation.';
+      state.ide = 'VS Code';
+      state.deployment = 'Vercel';
+      state.mcpServers = [{name:'NextEdu MCP', purpose:'Quiz generation & curriculum search'}];
+      state.permissions = [{name:'read_curriculum', granted:true},{name:'generate_quiz', granted:true},{name:'execute_shell', granted:false}];
+    }
+
+    state.prompts = prompts || [];
+    renderAll();
+    renderAudit(audit || []);
+    document.getElementById('loading-state').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+    updateStats();
+  } catch(e) {
+    document.getElementById('loading-state').innerHTML = `<i class="ti ti-alert-triangle" style="color:#D85A30;font-size:16px;"></i> <span style="color:var(--color-text-secondary); font-size:13px;">Connect your Supabase URL & key in the code to load live data. Showing demo state.</span>`;
+    state.sources = ['NCTB Curriculum Dataset', 'OpenAlex API', 'Supabase DB'];
+    state.models = ['claude-sonnet-4-20250514', 'text-embedding-3-small'];
+    state.frameworks = ['React', 'Supabase', 'Next.js', 'Tailwind CSS'];
+    state.contextFiles = ['CLAUDE.md', '.cursorrules'];
+    state.tools = ['generate_quiz', 'search_nctb', 'fetch_profile'];
+    state.raiScore = 72;
+    state.raiText = 'Bias mitigation via diverse curriculum sources. Student data anonymized. No PII in AI prompts. Regular fairness audits on quiz generation.';
+    state.ide = 'VS Code';
+    state.deployment = 'Vercel';
+    state.mcpServers = [{name:'NextEdu MCP', purpose:'Quiz generation & curriculum search'}];
+    state.permissions = [{name:'read_curriculum', granted:true},{name:'generate_quiz', granted:true},{name:'execute_shell', granted:false}];
+    state.prompts = [
+      {id:'1', title:'Bangla Tutor System Prompt', type:'system', tag:'Production', is_active:true, content:'You are NextEdu AI tutor. Always respond in Bangla...'},
+      {id:'2', title:'Quiz Generation Prompt', type:'user', tag:'Quiz Engine', is_active:false, content:'Generate {n} MCQ questions on topic "{topic}" for NCTB Class {class}...'},
+      {id:'3', title:'Personality Detection Prompt', type:'system', tag:'Analytics', is_active:false, content:'Analyze the student last 10 interactions and classify learning style...'}
+    ];
+    renderAll();
+    renderAudit([
+      {action:'Provenance saved', detail:'Manual save by Rafi Ahmed', created_at: new Date(Date.now()-86400000*2).toISOString()},
+      {action:'AI model updated', detail:'claude-sonnet-4 → claude-sonnet-4-20250514', created_at: new Date(Date.now()-86400000*3).toISOString()},
+      {action:'MCP tool added', detail:'generate_quiz added to MCP server', created_at: new Date(Date.now()-86400000*5).toISOString()},
+      {action:'Permission revoked', detail:'execute_shell removed — security review', created_at: new Date(Date.now()-86400000*7).toISOString()}
+    ]);
+    document.getElementById('loading-state').style.display = 'block';
+    document.getElementById('main-content').style.display = 'block';
+    updateStats();
+  }
+}
+
+function renderAll() {
+  renderTags('sources-list', state.sources, 'sources');
+  renderTags('models-list', state.models, 'models');
+  renderTags('frameworks-list', state.frameworks, 'frameworks');
+  renderTags('context-list', state.contextFiles, 'contextFiles');
+  renderTags('tools-list', state.tools, 'tools');
+  document.getElementById('rai-text').value = state.raiText;
+  document.getElementById('rai-slider').value = state.raiScore;
+  document.getElementById('ide-select').value = state.ide;
+  document.getElementById('deploy-input').value = state.deployment;
+  updateRaiScore(state.raiScore);
+  renderMcpServers();
+  renderPermissions();
+  renderPrompts();
+}
+
+function renderTags(containerId, arr, key) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = arr.map((t, i) =>
+    `<span class="tag">${t}<span class="remove" onclick="removeTag('${key}', ${i})">×</span></span>`
+  ).join('') || '<span style="font-size:12px; color:var(--color-text-tertiary);">None added yet</span>';
+}
+
+function addTag(key) {
+  const inputMap = {sources:'source-input', models:'model-input', frameworks:'framework-input', contextFiles:'context-input', tools:'tool-input'};
+  const containerMap = {sources:'sources-list', models:'models-list', frameworks:'frameworks-list', contextFiles:'context-list', tools:'tools-list'};
+  const input = document.getElementById(inputMap[key]);
+  const val = input.value.trim();
+  if (!val) return;
+  if (!state[key].includes(val)) { state[key].push(val); renderTags(containerMap[key], state[key], key); updateStats(); }
+  input.value = '';
+}
+
+function removeTag(key, idx) {
+  const containerMap = {sources:'sources-list', models:'models-list', frameworks:'frameworks-list', contextFiles:'context-list', tools:'tools-list'};
+  state[key].splice(idx, 1);
+  renderTags(containerMap[key], state[key], key);
+  updateStats();
+}
+
+function updateRaiScore(val) {
+  val = parseInt(val);
+  state.raiScore = val;
+  document.getElementById('rai-score-display').textContent = val;
+  document.getElementById('rai-bar').style.width = val + '%';
+  const color = val >= 70 ? '#1D9E75' : val >= 40 ? '#BA7517' : '#D85A30';
+  document.getElementById('rai-bar').style.background = color;
+  document.getElementById('rai-score-display').style.color = color;
+  document.getElementById('stat-rai').style.color = color;
+  document.getElementById('stat-rai').textContent = val;
+}
+
+function updateStats() {
+  document.getElementById('stat-sources').textContent = state.sources.length;
+  document.getElementById('stat-models').textContent = state.models.length;
+}
+
+function renderMcpServers() {
+  const el = document.getElementById('mcp-servers-list');
+  el.innerHTML = state.mcpServers.map((s, i) =>
+    `<div class="mcp-row">
+      <input type="text" placeholder="Server name" value="${s.name||''}" oninput="state.mcpServers[${i}].name=this.value" />
+      <input type="text" placeholder="Purpose / description" value="${s.purpose||''}" oninput="state.mcpServers[${i}].purpose=this.value" />
+    </div>`
+  ).join('');
+}
+
+function addMcpServer() {
+  state.mcpServers.push({name:'', purpose:''});
+  renderMcpServers();
+}
+
+function renderPermissions() {
+  const el = document.getElementById('permissions-list');
+  el.innerHTML = state.permissions.map((p, i) =>
+    `<div class="perm-row">
+      <input type="text" value="${p.name}" placeholder="Permission name" oninput="state.permissions[${i}].name=this.value" />
+      <label class="perm-toggle">
+        <input type="checkbox" ${p.granted ? 'checked' : ''} onchange="state.permissions[${i}].granted=this.checked" />
+        <span class="perm-slider"></span>
+      </label>
+      <span style="font-size:12px; min-width:50px; color:${p.granted ? '#1D9E75' : '#D85A30'}">${p.granted ? 'Granted' : 'Revoked'}</span>
+    </div>`
+  ).join('');
+}
+
+function addPermission() {
+  state.permissions.push({name:'', granted:true});
+  renderPermissions();
+}
+
+function renderPrompts() {
+  const el = document.getElementById('prompts-list');
+  const typeColors = {system:'#EEEDFE;color:#3C3489', user:'#E1F5EE;color:#085041'};
+  el.innerHTML = state.prompts.map(p =>
+    `<div class="prompt-card">
+      <div class="prompt-meta">
+        <div style="display:flex; align-items:center; gap:8px;">
+          ${p.is_active ? '<span class="active-dot"></span>' : ''}
+          <span class="prompt-title">${p.title}</span>
+          <span class="prompt-type-badge" style="background:${typeColors[p.type]||'#F1EFE8;color:#5F5E5A'}">${p.type}</span>
+          ${p.tag ? `<span class="badge" style="background:var(--color-background-secondary); color:var(--color-text-secondary);">${p.tag}</span>` : ''}
+        </div>
+        <span style="font-size:12px; color:var(--color-text-tertiary);">${p.is_active ? 'Active' : 'Inactive'}</span>
+      </div>
+      <div class="prompt-content-preview">${p.content}</div>
+    </div>`
+  ).join('') || '<p style="font-size:13px; color:var(--color-text-tertiary); padding:1rem 0;">No prompts recorded yet.</p>';
+}
+
+function openNewPrompt() { document.getElementById('new-prompt-form').style.display = 'block'; }
+function cancelNewPrompt() { document.getElementById('new-prompt-form').style.display = 'none'; }
+
+async function saveNewPrompt() {
+  const title = document.getElementById('np-title').value.trim();
+  const content = document.getElementById('np-content').value.trim();
+  const type = document.getElementById('np-type').value;
+  if (!title || !content) { showToast('Please fill title and content', 'warn'); return; }
+  const newP = {user_id:USER_ID, title, content, type, is_active:false};
+  try {
+    const saved = await sbFetch('prompts', {method:'POST', body:JSON.stringify(newP)});
+    state.prompts.unshift(saved[0]);
+  } catch(e) {
+    state.prompts.unshift({...newP, id: Date.now().toString()});
+  }
+  renderPrompts();
+  cancelNewPrompt();
+  document.getElementById('np-title').value = '';
+  document.getElementById('np-content').value = '';
+  showToast('Prompt saved');
+}
+
+function renderAudit(rows) {
+  const el = document.getElementById('audit-list');
+  const icons = {'Provenance saved':'ti-device-floppy','AI model updated':'ti-cpu','MCP tool added':'ti-plug','Permission revoked':'ti-lock-off'};
+  el.innerHTML = rows.map(r => {
+    const dt = new Date(r.created_at);
+    const rel = timeAgo(dt);
+    const icon = icons[r.action] || 'ti-history';
+    return `<div class="audit-row">
+      <i class="ti ${icon}" aria-hidden="true" style="font-size:15px; color:var(--color-text-tertiary); margin-top:1px;"></i>
+      <span class="audit-action">${r.action}</span>
+      <span class="audit-detail">${r.detail||''}</span>
+      <span class="audit-time">${rel}</span>
+    </div>`;
+  }).join('') || '<p style="font-size:13px; color:var(--color-text-tertiary);">No audit records yet.</p>';
+}
+
+function timeAgo(d) {
+  const s = Math.floor((Date.now() - d) / 1000);
+  if (s < 60) return 'just now';
+  if (s < 3600) return Math.floor(s/60) + 'm ago';
+  if (s < 86400) return Math.floor(s/3600) + 'h ago';
+  return Math.floor(s/86400) + 'd ago';
+}
+
+async function saveProvenance() {
+  const btn = document.getElementById('save-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spin"></div> Saving...';
+  state.raiText = document.getElementById('rai-text').value;
+  state.ide = document.getElementById('ide-select').value;
+  state.deployment = document.getElementById('deploy-input').value;
+
+  const permsObj = {};
+  state.permissions.forEach(p => { if(p.name) permsObj[p.name] = p.granted; });
+
+  const payload = {
+    user_id: USER_ID,
+    data_sources: state.sources,
+    ai_models: state.models,
+    frameworks: state.frameworks,
+    context_files: state.contextFiles,
+    tools_exposed: state.tools,
+    rai_practices: state.raiText,
+    rai_score: state.raiScore,
+    ide: state.ide,
+    deployment: state.deployment,
+    mcp_servers: state.mcpServers,
+    permissions: permsObj,
+    updated_at: new Date().toISOString()
+  };
+
+  try {
+    if (state.provenanceId) {
+      await sbFetch(`provenance?id=eq.${state.provenanceId}`, {method:'PATCH', body:JSON.stringify(payload), prefer:'return=minimal'});
+    } else {
+      const res = await sbFetch('provenance', {method:'POST', body:JSON.stringify(payload)});
+      if (res && res[0]) state.provenanceId = res[0].id;
+    }
+    await sbFetch('audit_log', {method:'POST', body:JSON.stringify({user_id:USER_ID, action:'Provenance saved', detail:`Saved by user — ${state.sources.length} sources, ${state.models.length} models, RAI score ${state.raiScore}`})});
+    showToast('Saved to Supabase');
+  } catch(e) {
+    showToast('Demo mode — configure Supabase URL to persist', 'warn');
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = '<i class="ti ti-device-floppy" aria-hidden="true"></i> Save provenance record';
+}
+
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  t.style.background = type === 'warn' ? '#BA7517' : '#1D9E75';
+  t.innerHTML = `<i class="ti ti-${type==='warn'?'alert-triangle':'check'}" aria-hidden="true"></i> ${msg}`;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('tab-' + tab).classList.add('active');
+}
+
+document.querySelectorAll('.tag-input-wrap input').forEach(inp => {
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); inp.nextElementSibling.click(); } });
+});
+
+init();
+</script>
+
+      </div>
+      
+    </section>
+
+
+
+
+  <!-- ═══════════════ HOME SCREEN ═══════════════ -->
+  <div class="screen active" id="screen-home">
+    <header class="header">
+      <div class="logo">Next<span>Edu</span></div>
+      <div class="header-right">
+        <div class="streak-badge">🔥 12</div>
+        <div class="avatar">RA</div>
+      </div>
+    </header>
+    <main class="content">
+      <section class="greeting">
+        <div class="greeting-sub">Good Morning</div>
+        <h1 class="greeting-name">হ্যালো, <span>Rafi</span> 👋</h1>
+      </section>
+
+      <div class="personality-bar">
+        <div class="pb-label">🧠 AI Personality Read</div>
+        <div class="pb-row">
+          <div class="pb-orb">🚀</div>
+          <div class="pb-text">
+            <div class="pb-name">Curious Explorer Mode</div>
+            <div class="pb-desc">তুমি গভীরভাবে বুঝতে চাও। AI তোমাকে advanced concepts দিয়ে শেখাবে।</div>
+          </div>
+        </div>
+        <div class="pb-chips">
+          <span class="pb-chip">CURIOUS</span>
+          <span class="pb-chip">DEEP-THINKER</span>
+          <span class="pb-chip">RESEARCH-READY</span>
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card teal">
+          <div class="stat-num teal">74%</div>
+          <div class="stat-label">পদার্থবিজ্ঞান দক্ষতা</div>
+        </div>
+        <div class="stat-card amber">
+          <div class="stat-num amber">SSC</div>
+          <div class="stat-label">Exam in 47 days</div>
+        </div>
+      </div>
+
+      <div class="ring-card">
+        <svg class="ring-svg" width="64" height="64" viewBox="0 0 64 64">
+          <circle cx="32" cy="32" r="26" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="6"/>
+          <circle cx="32" cy="32" r="26" fill="none" stroke="url(#rg)" stroke-width="6"
+            stroke-dasharray="163" stroke-dashoffset="57" stroke-linecap="round" transform="rotate(-90 32 32)"/>
+          <defs>
+            <linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#00d4aa"/>
+              <stop offset="100%" stop-color="#22d3ee"/>
+            </linearGradient>
+          </defs>
+          <text x="32" y="36" text-anchor="middle" fill="#00d4aa" font-size="13" font-weight="700" font-family="Syne,sans-serif">65%</text>
+        </svg>
+        <div class="ring-info">
+          <div class="ring-title">Daily Goal Progress</div>
+          <div class="ring-sub">৩টি topic বাকি আছে আজকের জন্য</div>
+          <div class="ring-bar"><div class="ring-fill" style="width:65%"></div></div>
+        </div>
+      </div>
+
+      <div class="level-banner">
+        <div class="lb-xp">+240 XP</div>
+        <div class="lb-text">
+          <div class="lb-title">Level 8 Achieved! 🎉</div>
+          <div class="lb-sub">Torque chapter complete করেছ</div>
+        </div>
+        <span style="font-size:22px">🏆</span>
+      </div>
+
+      <div class="section-header">
+        <div class="section-title">Continue Learning</div>
+        <div class="section-link" onclick="showScreen('subjects')">সব দেখো →</div>
+      </div>
+      <div class="continue-scroll">
+        <div class="continue-card" onclick="showScreen('chapters')">
+          <div class="cc-subj phy">⚛ PHYSICS</div>
+          <div class="cc-title">Torque &amp; Angular Momentum</div>
+          <div class="cc-progress"><div class="cc-fill phy" style="width:68%"></div></div>
+          <div class="cc-meta">68% • ৩০ মিনিট বাকি</div>
+        </div>
+        <div class="continue-card">
+          <div class="cc-subj chem">⚗ CHEMISTRY</div>
+          <div class="cc-title">Organic Reactions — Ch. 5</div>
+          <div class="cc-progress"><div class="cc-fill chem" style="width:45%"></div></div>
+          <div class="cc-meta">45% • ৪৫ মিনিট বাকি</div>
+        </div>
+        <div class="continue-card">
+          <div class="cc-subj math">∫ HIGHER MATH</div>
+          <div class="cc-title">Integration by Parts</div>
+          <div class="cc-progress"><div class="cc-fill math" style="width:20%"></div></div>
+          <div class="cc-meta">20% • নতুন</div>
+        </div>
+      </div>
+
+      <div class="section-header">
+        <div class="section-title">Study Activity</div>
+        <div class="section-link">এই মাস</div>
+      </div>
+      <div class="heatmap-wrap">
+        <div class="heatmap-grid" id="heatmap"></div>
+        <div class="heatmap-legend">
+          <div class="hm-leg-cell" style="background:rgba(255,255,255,.06)"></div><span>কম</span>
+          <div class="hm-leg-cell" style="background:rgba(0,212,170,.3)"></div>
+          <div class="hm-leg-cell" style="background:rgba(0,212,170,.6)"></div>
+          <div class="hm-leg-cell" style="background:var(--teal)"></div><span>বেশি</span>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ═══════════════ SUBJECTS SCREEN ═══════════════ -->
+  <div class="screen" id="screen-subjects">
+    <header class="header">
+      <div class="logo">Next<span>Edu</span></div>
+      <div class="header-right"><div class="streak-badge">🔥 12</div></div>
+    </header>
+    <main class="content">
+      <div class="page-intro">
+        <div class="page-tag">Class 10 — NCTB</div>
+        <h1 class="page-title">বিষয়সমূহ</h1>
+        <p class="page-sub">তোমার সব বিষয় এক জায়গায়</p>
+      </div>
+      <div class="subject-grid">
+        <div class="subj-card" onclick="showScreen('chapters')" style="border-color:rgba(129,140,248,.2)">
+          <span class="ai-score">AI 92%</span>
+          <span class="subj-icon">⚛️</span>
+          <div class="subj-name">পদার্থবিজ্ঞান</div>
+          <div class="subj-ch">14 chapter • Force, Optics...</div>
+          <div class="subj-prog-row">
+            <div class="subj-pct" style="color:#818cf8">68%</div>
+            <div class="subj-bar"><div class="subj-fill" style="width:68%;background:linear-gradient(90deg,#818cf8,#a78bfa)"></div></div>
+          </div>
+        </div>
+        <div class="subj-card" style="border-color:rgba(244,114,182,.2)">
+          <span class="ai-score">AI 78%</span>
+          <span class="subj-icon">⚗️</span>
+          <div class="subj-name">রসায়নবিজ্ঞান</div>
+          <div class="subj-ch">12 chapter • Organic, Acids...</div>
+          <div class="subj-prog-row">
+            <div class="subj-pct" style="color:#f472b6">45%</div>
+            <div class="subj-bar"><div class="subj-fill" style="width:45%;background:linear-gradient(90deg,#f472b6,#fb7185)"></div></div>
+          </div>
+        </div>
+        <div class="subj-card" style="border-color:rgba(0,212,170,.2)">
+          <span class="ai-score">AI 85%</span>
+          <span class="subj-icon">🧬</span>
+          <div class="subj-name">জীববিজ্ঞান</div>
+          <div class="subj-ch">11 chapter • Cell, Genetics...</div>
+          <div class="subj-prog-row">
+            <div class="subj-pct" style="color:var(--teal)">55%</div>
+            <div class="subj-bar"><div class="subj-fill" style="width:55%;background:linear-gradient(90deg,var(--teal),var(--emerald))"></div></div>
+          </div>
+        </div>
+        <div class="subj-card" style="border-color:rgba(245,158,11,.2)">
+          <span class="ai-score">AI 71%</span>
+          <span class="subj-icon">∫</span>
+          <div class="subj-name">উচ্চতর গণিত</div>
+          <div class="subj-ch">10 chapter • Calculus, Algebra...</div>
+          <div class="subj-prog-row">
+            <div class="subj-pct" style="color:var(--amber)">32%</div>
+            <div class="subj-bar"><div class="subj-fill" style="width:32%;background:linear-gradient(90deg,var(--amber),#fbbf24)"></div></div>
+          </div>
+        </div>
+        <div class="subj-card" style="border-color:rgba(34,211,238,.2)">
+          <span class="ai-score">AI 90%</span>
+          <span class="subj-icon">💻</span>
+          <div class="subj-name">ICT</div>
+          <div class="subj-ch">8 chapter • Programming...</div>
+          <div class="subj-prog-row">
+            <div class="subj-pct" style="color:var(--cyan)">80%</div>
+            <div class="subj-bar"><div class="subj-fill" style="width:80%;background:linear-gradient(90deg,var(--cyan),#67e8f9)"></div></div>
+          </div>
+        </div>
+        <div class="subj-card" style="border-color:rgba(251,191,36,.2)">
+          <span class="ai-score">AI 88%</span>
+          <span class="subj-icon">📖</span>
+          <div class="subj-name">বাংলা</div>
+          <div class="subj-ch">সাহিত্য, ব্যাকরণ, রচনা...</div>
+          <div class="subj-prog-row">
+            <div class="subj-pct" style="color:#fbbf24">72%</div>
+            <div class="subj-bar"><div class="subj-fill" style="width:72%;background:linear-gradient(90deg,#fbbf24,#f59e0b)"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="section-header"><div class="section-title">⚠️ Weak Topics</div></div>
+      <div class="weak-topics-box">
+        <div class="weak-label">AI detected — revision দরকার</div>
+        <div class="weak-item"><span>Organic Chemistry — Alkenes</span><span style="color:var(--coral)">38%</span></div>
+        <div class="weak-item"><span>Integration Techniques</span><span style="color:var(--coral)">29%</span></div>
+        <div class="weak-item"><span>Electromagnetic Induction</span><span style="color:var(--amber)">51%</span></div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ═══════════════ CHAPTERS SCREEN ═══════════════ -->
+  <div class="screen" id="screen-chapters">
+    <header class="header">
+      <div class="logo">⚛ Physics</div>
+      <div class="header-right"><div class="streak-badge">Class 11</div></div>
+    </header>
+    <main class="content">
+      <div class="back-btn" onclick="showScreen('subjects')">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        বিষয়সমূহে ফিরুন
+      </div>
+      <h1 class="page-title">পদার্থবিজ্ঞান</h1>
+      <p class="page-sub">NCTB Curriculum • Class 11-12</p>
+
+      <div class="chapter-card" id="ch1">
+        <div class="ch-header" onclick="toggleChapter('ch1')">
+          <div class="ch-num" style="background:rgba(129,140,248,.15);color:#818cf8">01</div>
+          <div class="ch-info">
+            <div class="ch-title">ভৌত জগৎ ও পরিমাপ</div>
+            <div class="ch-meta"><span>৬ topics</span><span>৯০ মিনিট</span></div>
+          </div>
+          <div class="ch-badges">
+            <span class="badge easy">Easy</span>
+            <svg class="ch-chevron" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+        <div class="ch-topics">
+          <div class="topic-item"><div class="ti-dot" style="background:#818cf8"></div><div class="ti-name">পদার্থবিজ্ঞানের পরিচিতি</div><div class="ti-time">15m</div></div>
+          <div class="topic-item"><div class="ti-dot" style="background:#818cf8"></div><div class="ti-name">SI একক পদ্ধতি</div><div class="ti-time">20m</div></div>
+        </div>
+      </div>
+
+      <div class="chapter-card open" id="ch2">
+        <div class="ch-header" onclick="toggleChapter('ch2')">
+          <div class="ch-num" style="background:rgba(0,212,170,.15);color:var(--teal)">05</div>
+          <div class="ch-info">
+            <div class="ch-title">বল ও গতি</div>
+            <div class="ch-meta"><span>৮ topics</span><span>১৮০ মিনিট</span></div>
+          </div>
+          <div class="ch-badges">
+            <span class="badge med">Medium</span>
+            <svg class="ch-chevron open" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+        <div class="ch-topics open">
+          <div class="topic-item" onclick="showScreen('topic')">
+            <div class="ti-dot"></div>
+            <div class="ti-name active-topic">⚡ Torque (টর্ক)</div>
+            <div class="ti-time active-time">Active</div>
+          </div>
+          <div class="topic-item"><div class="ti-dot"></div><div class="ti-name">Angular Momentum</div><div class="ti-time">25m</div></div>
+        </div>
+      </div>
+
+      <div class="chapter-card" id="ch3">
+        <div class="ch-header" onclick="toggleChapter('ch3')">
+          <div class="ch-num" style="background:rgba(244,63,94,.1);color:var(--coral)">08</div>
+          <div class="ch-info">
+            <div class="ch-title">তরঙ্গ ও শব্দ</div>
+            <div class="ch-meta"><span>৭ topics</span><span>১৫০ মিনিট</span></div>
+          </div>
+          <div class="ch-badges">
+            <span class="badge hard">Hard</span>
+            <svg class="ch-chevron" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+        <div class="ch-topics"></div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ═══════════════ TOPIC SCREEN ═══════════════ -->
+  <div class="screen" id="screen-topic">
+    <header class="header">
+      <div style="font-size:12px;color:var(--text2)">Physics · Unit 4</div>
+      <div class="header-right"><div class="streak-badge">65% done</div></div>
+    </header>
+    <main class="content">
+      <div class="back-btn" onclick="showScreen('chapters')">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        Chapter-এ ফিরুন
+      </div>
+      <div class="topic-hero">
+        <div class="th-tag">⚡ Force &amp; Motion · Torque</div>
+        <h1 class="th-title">Torque (টর্ক)</h1>
+        <p class="th-bn">ঘূর্ণনের কারণ এবং এর প্রয়োগের মূল নীতি</p>
+        <div class="formula-box">
+          <div class="formula-latex">τ = r × F × sin θ</div>
+          <div class="formula-label">The Mathematical Identity of Torque</div>
+        </div>
+        <div class="topic-stats">
+          <div class="ts-item"><div class="ts-label">Magnitude</div><div class="ts-val">N·m</div></div>
+          <div class="ts-divider"></div>
+          <div class="ts-item"><div class="ts-label">Nature</div><div class="ts-val">Vector</div></div>
+          <div class="ts-divider"></div>
+          <div class="ts-item"><div class="ts-label">Dimension</div><div class="ts-val">ML²T⁻²</div></div>
+        </div>
+        <div class="hero-tags">
+          <span class="hero-tag">📐 Geometry</span>
+          <span class="hero-tag">⚙️ Mechanics</span>
+          <span class="hero-tag">🔬 Real-life</span>
+        </div>
+      </div>
+
+      <div class="depth-selector">
+        <div class="ds-label">🎓 Learning Depth</div>
+        <div class="ds-levels">
+          <button class="ds-btn" onclick="setDepth(this,'class6')">Class 6-8</button>
+          <button class="ds-btn active" onclick="setDepth(this,'hsc')">HSC</button>
+          <button class="ds-btn" onclick="setDepth(this,'bsc')">BSc+</button>
+          <button class="ds-btn" onclick="setDepth(this,'research')">Research</button>
+        </div>
+      </div>
+
+      <div class="ai-panel">
+        <div class="aip-header">
+          <div class="ai-orb"><span style="font-size:16px">🤖</span></div>
+          <div>
+            <div class="aip-name">NextEdu AI Tutor</div>
+            <div class="aip-mode">✦ Curious Explorer Mode</div>
+          </div>
+        </div>
+        <div class="ai-bubble" id="ai-message">
+          টর্ক হলো ঘূর্ণনের কারণ — ঠিক যেমন বল হলো রৈখিক গতির কারণ।
+          <strong>τ = r × F</strong>। Door handle কেন দরজার প্রান্তে থাকে?
+          কারণ r বড় হলে কম force দিয়েও বেশি torque পাওয়া যায়!
+          <div class="typing"><span></span><span></span><span></span></div>
+        </div>
+        <div class="ai-action-btns">
+          <button class="ai-btn" onclick="changeMode('child')">🧒 শিশুর মতো</button>
+          <button class="ai-btn" onclick="changeMode('story')">📖 গল্পে বলো</button>
+          <button class="ai-btn" onclick="changeMode('advanced')">🔬 PhD level</button>
+        </div>
+      </div>
+
+      <div class="section-header"><div class="section-title">Deep Dive</div></div>
+      <div class="subtopic-list">
+        <div class="sub-item" onclick="showScreen('quiz')">
+          <div class="sub-dot"></div>
+          <div class="sub-text">
+            <div class="sub-title">MCQ Quiz</div>
+            <div class="sub-desc">Adaptive • IRT-based</div>
+          </div>
+          <span class="sub-arrow">›</span>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ═══════════════ QUIZ SCREEN ═══════════════ -->
+  <div class="screen" id="screen-quiz">
+    <header class="header">
+      <div style="font-size:13px;font-weight:600">Adaptive Quiz</div>
+      <div class="header-right"><div class="streak-badge">Torque</div></div>
+    </header>
+    <main class="content">
+      <div class="back-btn" onclick="showScreen('topic')">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        Topic-এ ফিরুন
+      </div>
+      <div class="quiz-header">
+        <div class="quiz-title">IRT Adaptive Quiz</div>
+        <div class="quiz-sub">তোমার উত্তর অনুযায়ী প্রশ্ন কঠিন/সহজ হবে</div>
+        <div class="theta-bar">
+          <div class="theta-label">AI Ability Estimate (θ)</div>
+          <div class="theta-row">
+            <div class="theta-num" id="theta-num">0.8</div>
+            <div class="theta-track-wrap">
+              <div class="theta-track"><div class="theta-fill" id="theta-fill" style="width:65%"></div></div>
+            </div>
+            <div style="font-size:11px;color:var(--text2)">Max: 3.0</div>
+          </div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-num">Question 2 · Medium</div>
+        <div class="q-text">একটি door-এর hinge থেকে ০.৮ m দূরে ৫০ N বল ৯০° কোণে প্রয়োগ করলে torque কত হবে?</div>
+        <div class="q-options" id="q-options">
+          <div class="q-opt" onclick="selectAnswer(this,false)"><div class="opt-letter">A</div>35 N·m</div>
+          <div class="q-opt" onclick="selectAnswer(this,true)"><div class="opt-letter">B</div>40 N·m — τ = 0.8 × 50 × sin90° = 40</div>
+          <div class="q-opt" onclick="selectAnswer(this,false)"><div class="opt-letter">C</div>25 N·m</div>
+          <div class="q-opt" onclick="selectAnswer(this,false)"><div class="opt-letter">D</div>62.5 N·m</div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ═══════════════ AI TUTOR SCREEN ═══════════════ -->
+  <div class="screen" id="screen-ai">
+    <header class="header">
+      <div class="logo">AI Tutor</div>
+      <div class="header-right"><div class="streak-badge">Bangla RAG</div></div>
+    </header>
+    <main class="content">
+      <div class="search-hero">
+        <h2 class="sh-title">বাংলায় জিজ্ঞেস করো 🇧🇩</h2>
+        <p class="sh-sub">NCTB পাঠ্যপুস্তক + অ্যাডভান্সড কনটেন্ট</p>
+      </div>
+      <div class="search-box">
+        <svg class="sb-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input class="sb-input" id="search-input"
+          placeholder="যেকোনো প্রশ্ন বাংলায় লিখুন..."
+          onkeypress="handleSearch(event)">
+      </div>
+      <div class="chat-messages" id="chat-messages">
+        <div class="msg user"><div class="msg-bubble">Torque এবং Force-এর মধ্যে পার্থক্য কী?</div></div>
+        <div class="msg ai">
+          <div class="msg-bubble">Force হলো linear motion-এর কারণ (F = ma), কিন্তু Torque হলো rotational motion-এর কারণ (τ = Iα)।<br><br>Mathematically: <strong>τ = r × F</strong> (cross product)।</div>
+          <div class="msg-cite">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+            Source: NCTB Physics Ch.5
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ═══════════════ INSIGHTS SCREEN ═══════════════ -->
+  <div class="screen" id="screen-insights">
+    <header class="header">
+      <div class="logo">AI Insights</div>
+      <div class="header-right"><div class="streak-badge">May 2026</div></div>
+    </header>
+    <main class="content">
+      <div class="page-intro">
+        <div class="page-tag">AI-Powered Analytics</div>
+        <h1 class="page-title">তোমার Performance</h1>
+      </div>
+      <div class="ins-row">
+        <div class="ins-card"><div class="ins-label">Predicted SSC</div><div class="ins-val up">A+</div><div class="ins-trend up">↑ Last month: A</div></div>
+        <div class="ins-card"><div class="ins-label">Study Streak</div><div class="ins-val up">12 days</div><div class="ins-trend up">Personal best!</div></div>
+        <div class="ins-card"><div class="ins-label">Weak Spots</div><div class="ins-val warn">3</div><div class="ins-trend warn">Needs attention</div></div>
+        <div class="ins-card"><div class="ins-label">AI Confidence</div><div class="ins-val up">84%</div><div class="ins-trend up">↑ 6% this week</div></div>
+      </div>
+      <div class="radar-card">
+        <div class="section-title" style="margin-bottom:14px">📡 Subject Mastery Radar</div>
+        <svg width="220" height="220" viewBox="0 0 220 220" style="display:block;margin:0 auto">
+          <g transform="translate(110,110)">
+            <polygon points="0,-80 69,-41 69,41 0,80 -69,41 -69,-41" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+            <polygon points="0,-60 52,-30 52,30 0,60 -52,30 -52,-30" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+            <polygon points="0,-40 35,-20 35,20 0,40 -35,20 -35,-20" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+            <line x1="0" y1="0" x2="0" y2="-80" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+            <line x1="0" y1="0" x2="69" y2="-41" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+            <line x1="0" y1="0" x2="69" y2="41" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+            <line x1="0" y1="0" x2="0" y2="80" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+            <line x1="0" y1="0" x2="-69" y2="41" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+            <line x1="0" y1="0" x2="-69" y2="-41" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+            <polygon points="0,-57 48,-27 45,29 0,48 -36,24 -48,-28" fill="rgba(0,212,170,.15)" stroke="#00d4aa" stroke-width="1.5"/>
+            <text x="0" y="-90" text-anchor="middle" fill="#8b9ab5" font-size="10" font-family="Space Grotesk">Physics</text>
+            <text x="82" y="-45" fill="#8b9ab5" font-size="10" font-family="Space Grotesk">Chemistry</text>
+            <text x="76" y="55" fill="#8b9ab5" font-size="10" font-family="Space Grotesk">Biology</text>
+            <text x="0" y="97" text-anchor="middle" fill="#8b9ab5" font-size="10" font-family="Space Grotesk">Math</text>
+            <text x="-118" y="55" fill="#8b9ab5" font-size="10" font-family="Space Grotesk">Bangla</text>
+            <text x="-110" y="-40" fill="#8b9ab5" font-size="10" font-family="Space Grotesk">English</text>
+          </g>
+        </svg>
+      </div>
+    </main>
+  </div>
+
+  <!-- ═══════════════ PROVENANCE SCREEN ═══════════════ -->
+  <div class="screen" id="screen-provenance">
+    <header class="header">
+      <div class="logo prov-logo">Next<span>Provenance</span></div>
+      <div class="header-right"><div class="streak-badge prov-badge">v2.4.1</div></div>
+    </header>
+    <main class="content">
+      <div class="prov-hero">
+        <div class="prov-tag">🔍 Build Provenance</div>
+        <h1 class="prov-title">Transparency &amp; Auditability</h1>
+        <p class="prov-sub">Document your data sources, AI models, responsible practices, tooling, and MCP usage — all in one auditable place. AI-powered suggestions built in.</p>
+      </div>
+
+      <div class="prov-tabs" id="prov-tabs">
+        <button class="ptab active" onclick="switchProvTab('data',this)">📊 Data &amp; AI</button>
+        <button class="ptab" onclick="switchProvTab('tooling',this)">🛠 Tooling</button>
+        <button class="ptab" onclick="switchProvTab('mcp',this)">⚡ MCP Usage</button>
+        <button class="ptab" onclick="switchProvTab('prompts',this)">📝 Prompts</button>
+        <button class="ptab" onclick="switchProvTab('rai',this)">🛡 Responsible AI</button>
+      </div>
+
+      <!-- DATA & AI TAB -->
+      <div class="prov-section active" id="ptab-data">
+        <div class="prov-card">
+          <div class="pc-header">
+            <div class="pc-icon" style="background:rgba(0,212,170,.12)">📡</div>
+            <div><div class="pc-title">Data Sources</div><div class="pc-sub">APIs, datasets, scraped data</div></div>
+            <div class="pc-badge judge">Judge + Admin</div>
+          </div>
+          <div class="prov-field-label">List data sources used</div>
+          <div class="tag-input-wrap" id="datasource-wrap" onclick="focusTagInput('datasource-input')">
+            <div class="tag-chip">NCTB Textbook PDF<span class="remove-tag" onclick="removeTag(this)">✕</span></div>
+            <div class="tag-chip">Bangla Wikipedia API<span class="remove-tag" onclick="removeTag(this)">✕</span></div>
+            <div class="tag-chip">SSC Board Questions DB<span class="remove-tag" onclick="removeTag(this)">✕</span></div>
+            <input class="tag-input-ghost" id="datasource-input" placeholder="Type and press Enter..." onkeydown="addTag(event,'datasource-wrap')">
+          </div>
+          <button class="ai-suggest-btn" onclick="aiSuggest(this,'datasources')">
+            <svg class="ai-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            AI: Suggest missing data sources for an EdTech app
+          </button>
+          <div class="ai-response-box" id="ai-datasources"></div>
+        </div>
+
+        <div class="prov-card">
+          <div class="pc-header">
+            <div class="pc-icon" style="background:rgba(129,140,248,.12)">🤖</div>
+            <div><div class="pc-title">AI Models Used</div><div class="pc-sub">LLMs, embeddings, classifiers</div></div>
+            <div class="pc-badge judge">Judge + Admin</div>
+          </div>
+          <div class="prov-field-label">Models (type + Enter to add)</div>
+          <div class="tag-input-wrap" id="aimodel-wrap" onclick="focusTagInput('aimodel-input')">
+            <div class="tag-chip purple">claude-sonnet-4-20250514<span class="remove-tag" onclick="removeTag(this)">✕</span></div>
+            <div class="tag-chip purple">text-embedding-3-small<span class="remove-tag" onclick="removeTag(this)">✕</span></div>
+            <input class="tag-input-ghost" id="aimodel-input" placeholder="Add model name..." onkeydown="addTag(event,'aimodel-wrap')">
+          </div>
+          <button class="ai-suggest-btn" onclick="aiSuggest(this,'aimodels')">
+            <svg class="ai-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            AI: Analyze model choices &amp; suggest alternatives
+          </button>
+          <div class="ai-response-box" id="ai-aimodels"></div>
+        </div>
+      </div>
+
+      <!-- TOOLING TAB -->
+      <div class="prov-section" id="ptab-tooling">
+        <div class="prov-card">
+          <div class="pc-header">
+            <div class="pc-icon" style="background:rgba(0,212,170,.1)">💻</div>
+            <div><div class="pc-title">IDE / Editor</div><div class="pc-sub">Development environment</div></div>
+            <div class="pc-badge team">Team Only</div>
+          </div>
+          <div class="prov-field-label">Select IDE</div>
+          <select class="prov-select" id="ide-select">
+            <option value="">Select IDE...</option>
+            <option value="cursor" selected>Cursor</option>
+            <option value="vscode">VS Code</option>
+            <option value="windsurf">Windsurf</option>
+            <option value="neovim">Neovim</option>
+            <option value="webstorm">WebStorm</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="prov-card">
+          <div class="pc-header">
+            <div class="pc-icon" style="background:rgba(245,158,11,.1)">🚀</div>
+            <div><div class="pc-title">Deployment Method</div><div class="pc-sub">How the app is deployed</div></div>
+            <div class="pc-badge team">Team Only</div>
+          </div>
+          <div class="prov-field-label">Deployment platform</div>
+          <select class="prov-select">
+            <option value="">Select deployment...</option>
+            <option value="vercel" selected>Vercel</option>
+            <option value="aws">AWS</option>
+            <option value="docker">Docker</option>
+            <option value="railway">Railway</option>
+            <option value="gcp">Google Cloud</option>
+            <option value="azure">Azure</option>
+          </select>
+        </div>
+        <div class="prov-card">
+          <div class="pc-header">
+            <div class="pc-icon" style="background:rgba(34,211,238,.1)">📦</div>
+            <div><div class="pc-title">Frameworks &amp; Libraries</div><div class="pc-sub">Tech stack used</div></div>
+            <div class="pc-badge team">Team Only</div>
+          </div>
+          <div class="prov-field-label">Add frameworks</div>
+          <div class="tag-input-wrap" id="framework-wrap" onclick="focusTagInput('framework-input')">
+            <div class="tag-chip cyan">React<span class="remove-tag" onclick="removeTag(this)">✕</span></div>
+            <div class="tag-chip cyan">LangChain<span class="remove-tag" onclick="removeTag(this)">✕</span></div>
+            <div class="tag-chip cyan">Supabase<span class="remove-tag" onclick="removeTag(this)">✕</span></div>
+            <input class="tag-input-ghost" id="framework-input" placeholder="React, TensorFlow, LangChain..." onkeydown="addTagStyled(event,'framework-wrap','cyan')">
+          </div>
+        </div>
+        <div class="prov-card">
+          <div class="pc-header">
+            <div class="pc-icon" style="background:rgba(244,114,182,.1)">📋</div>
+            <div><div class="pc-title">Context / Memory Files</div><div class="pc-sub">.cursorrules, CLAUDE.md, etc.</div></div>
+            <div class="pc-badge team">Team Only</div>
+          </div>
+          <div class="prov-field-label">File names used</div>
+          <div class="tag-input-wrap" id="ctx-wrap" onclick="focusTagInput('ctx-input')">
+            <div class="tag-chip pink">.cursorrules<span class="remove-tag" onclick="removeTag(this)">✕</span></div>
+            <div class="tag-chip pink">CLAUDE.md<span class="remove-tag" onclick="removeTag(this)">✕</span></div>
+            <input class="tag-input-ghost" id="ctx-input" placeholder=".cursorrules, CLAUDE.md..." onkeydown="addTagStyled(event,'ctx-wrap','pink')">
+          </div>
+        </div>
+      </div>
+
+      <!-- MCP USAGE TAB -->
+      <div class="prov-section" id="ptab-mcp">
+        <div class="prov-card">
+          <div class="pc-header">
+            <div class="pc-icon" style="background:rgba(0,212,170,.1)">⚡</div>
+            <div><div class="pc-title">MCP Servers Used</div><div class="pc-sub">Name and purpose of each server</div></div>
+            <div class="pc-badge team">Team Only</div>
+          </div>
+          <div class="mcp-row" id="mcp-servers-list">
+            <div class="mcp-item">
+              <div class="mcp-item-header"><div class="mcp-dot"></div><input class="mcp-name-input" value="filesystem-mcp" placeholder="Server name..."><span class="mcp-server-label">Server</span></div>
+              <input class="mcp-purpose-input" value="Read/write local NCTB PDF files and question banks" placeholder="Purpose...">
+            </div>
+            <div class="mcp-item">
+              <div class="mcp-item-header"><div class="mcp-dot purple"></div><input class="mcp-name-input" value="anthropic-claude-mcp" placeholder="Server name..."><span class="mcp-server-label">Server</span></div>
+              <input class="mcp-purpose-input" value="Adaptive quiz generation and Bangla RAG Q&A" placeholder="Purpose...">
+            </div>
+          </div>
+          <button class="add-mcp-btn" onclick="addMcpServer()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add MCP Server
+          </button>
+        </div>
+        <div class="prov-card">
+          <div class="pc-header">
+            <div class="pc-icon" style="background:rgba(129,140,248,.1)">🔧</div>
+            <div><div class="pc-title">Tools Exposed via MCP</div><div class="pc-sub">Callable tools and their actions</div></div>
+            <div class="pc-badge team">Team Only</div>
+          </div>
+          <div class="prov-field-label">Tool names</div>
+          <div class="tag-input-wrap" id="tools-wrap" onclick="focusTagInput('tools-input')">
+            <div class="tag-chip">read_file<span class="remove-tag" onclick="removeTag(this)">✕</span></div>
+            <div class="tag-chip">write_file<span class="remove-tag" onclick="removeTag(this)">✕</span></div>
+            <div class="tag-chip">generate_quiz<span class="remove-tag" onclick="removeTag(this)">✕</span></div>
+            <div class="tag-chip">search_nctb<span class="remove-tag" onclick="removeTag(this)">✕</span></div>
+            <input class="tag-input-ghost" id="tools-input" placeholder="Tool name..." onkeydown="addTag(event,'tools-wrap')">
+          </div>
+        </div>
+        <div class="prov-card">
+          <div class="pc-header">
+            <div class="pc-icon" style="background:rgba(244,63,94,.1)">🔐</div>
+            <div><div class="pc-title">Permissions Granted</div><div class="pc-sub">Access controls for MCP tools</div></div>
+            <div class="pc-badge team">Team Only</div>
+          </div>
+          <div class="perm-toggle"><div><div class="perm-name">File System Read</div><div class="perm-desc">Read access to /data/nctb/ directory</div></div><div class="toggle-sw on" onclick="togglePerm(this)"></div></div>
+          <div class="perm-toggle"><div><div class="perm-name">File System Write</div><div class="perm-desc">Write to /cache/ and /outputs/ only</div></div><div class="toggle-sw on" onclick="togglePerm(this)"></div></div>
+          <div class="perm-toggle"><div><div class="perm-name">Network Access</div><div class="perm-desc">HTTP calls to external APIs</div></div><div class="toggle-sw" onclick="togglePerm(this)"></div></div>
+          <div class="perm-toggle"><div><div class="perm-name">Database Read/Write</div><div class="perm-desc">Supabase user progress tables</div></div><div class="toggle-sw on" onclick="togglePerm(this)"></div></div>
+          <div class="perm-toggle"><div><div class="perm-name">Execute Shell Commands</div><div class="perm-desc">Restricted — sandboxed only</div></div><div class="toggle-sw" onclick="togglePerm(this)"></div></div>
+        </div>
+      </div>
+
+      <!-- PROMPTS TAB -->
+      <div class="prov-section" id="ptab-prompts">
+        <div class="prompts-header">
+          <div>
+            <div class="section-title">Prompt Library</div>
+            <div class="prompt-count-label" id="prompt-count-label">3 prompts recorded</div>
+          </div>
+          <div class="pc-badge team">Team Only</div>
+        </div>
+        <div id="prompt-list">
+          <div class="prompt-card" data-id="1">
+            <button class="prompt-del" onclick="deletePrompt(this)">✕</button>
+            <div class="prompt-card-title">Bangla Tutor System Prompt</div>
+            <div class="prompt-card-text">You are NextEdu's AI tutor. Always respond in Bangla unless the user writes in English. Adapt your explanation depth based on the student's personality profile...</div>
+            <div class="prompt-card-meta"><span class="prompt-meta-chip">System</span><span class="prompt-meta-chip">Production</span><span class="prompt-meta-chip active-chip">✓ Active</span></div>
+          </div>
+          <div class="prompt-card" data-id="2">
+            <button class="prompt-del" onclick="deletePrompt(this)">✕</button>
+            <div class="prompt-card-title">Quiz Generation Prompt</div>
+            <div class="prompt-card-text">Generate {n} MCQ questions on the topic "{topic}" for NCTB Class {class}. Each question must have 4 options, one correct answer, a Bangla explanation, and an IRT difficulty parameter...</div>
+            <div class="prompt-card-meta"><span class="prompt-meta-chip">User</span><span class="prompt-meta-chip">Quiz Engine</span></div>
+          </div>
+          <div class="prompt-card" data-id="3">
+            <button class="prompt-del" onclick="deletePrompt(this)">✕</button>
+            <div class="prompt-card-title">Personality Detection Prompt</div>
+            <div class="prompt-card-text">Analyze the student's last 10 interactions and classify their learning style into one of: [curious_explorer, exam_focused, visual_learner, social_learner]. Output JSON only...</div>
+            <div class="prompt-card-meta"><span class="prompt-meta-chip">System</span><span class="prompt-meta-chip">Analytics</span></div>
+          </div>
+        </div>
+        <button class="add-prompt-btn" onclick="openAddPrompt()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add New Prompt
+        </button>
+        <div id="add-prompt-form" class="add-prompt-form" style="display:none">
+          <div class="prov-field-label" style="margin-bottom:6px">Prompt Title</div>
+          <input id="new-prompt-title" class="prov-input" placeholder="e.g. Revision Summary Prompt">
+          <div class="prov-field-label" style="margin-bottom:6px;margin-top:10px">Prompt Text</div>
+          <textarea id="new-prompt-text" class="prov-textarea" placeholder="Paste your prompt here..."></textarea>
+          <div class="prompt-form-actions">
+            <select id="new-prompt-type" class="prov-select" style="flex:1">
+              <option value="system">System</option>
+              <option value="user">User</option>
+              <option value="assistant">Assistant</option>
+            </select>
+            <button onclick="saveNewPrompt()" class="btn-save-prompt">Save</button>
+            <button onclick="document.getElementById('add-prompt-form').style.display='none'" class="btn-cancel">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- RESPONSIBLE AI TAB -->
+      <div class="prov-section" id="ptab-rai">
+        <div class="prov-card">
+          <div class="pc-header">
+            <div class="pc-icon" style="background:rgba(0,212,170,.1)">🛡</div>
+            <div><div class="pc-title">Responsible AI Score</div><div class="pc-sub">AI-evaluated transparency &amp; fairness</div></div>
+            <div class="pc-badge judge">Judge + Admin</div>
+          </div>
+          <div class="rai-score">
+            <div class="rai-ring">
+              <svg width="72" height="72" viewBox="0 0 72 72">
+                <circle cx="36" cy="36" r="28" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="6"/>
+                <circle cx="36" cy="36" r="28" fill="none" stroke="#00d4aa" stroke-width="6"
+                  stroke-dasharray="176" stroke-dashoffset="35" stroke-linecap="round" transform="rotate(-90 36 36)"/>
+                <text x="36" y="40" text-anchor="middle" fill="#00d4aa" font-size="14" font-weight="700" font-family="Syne,sans-serif">80</text>
+              </svg>
+            </div>
+            <div class="rai-info">
+              <div class="rai-standing">Good Standing</div>
+              <div class="rai-sub">Score: 80/100 • 3 areas need attention</div>
+              <button class="ai-suggest-btn" style="margin-top:8px" onclick="aiSuggest(this,'rai')">
+                <svg class="ai-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                AI: Full RAI audit report
+              </button>
+            </div>
+          </div>
+          <div class="ai-response-box" id="ai-rai"></div>
+          <div class="rai-items">
+            <div class="rai-item"><div class="rai-dot pass"></div><div class="rai-item-text">Data privacy &amp; COPPA compliance</div><div class="rai-status pass">✓ Pass</div></div>
+            <div class="rai-item"><div class="rai-dot pass"></div><div class="rai-item-text">AI output transparency to students</div><div class="rai-status pass">✓ Pass</div></div>
+            <div class="rai-item"><div class="rai-dot partial"></div><div class="rai-item-text">Bias testing across gender &amp; region</div><div class="rai-status partial">⚠ Partial</div></div>
+            <div class="rai-item"><div class="rai-dot partial"></div><div class="rai-item-text">Human-in-the-loop for grade-critical AI</div><div class="rai-status partial">⚠ Partial</div></div>
+            <div class="rai-item"><div class="rai-dot fail"></div><div class="rai-item-text">Model explanation logging (XAI)</div><div class="rai-status fail">✗ Missing</div></div>
+          </div>
+        </div>
+        <div class="prov-card">
+          <div class="pc-header">
+            <div class="pc-icon" style="background:rgba(129,140,248,.1)">📋</div>
+            <div><div class="pc-title">Responsible AI Practices</div><div class="pc-sub">Bias mitigation, transparency docs</div></div>
+            <div class="pc-badge judge">Judge + Admin</div>
+          </div>
+          <div class="prov-field-label">Describe your practices</div>
+          <textarea class="prov-textarea">We use Claude claude-sonnet-4-20250514 with a strict system prompt that prevents harmful content. Quiz questions are reviewed monthly for bias across gender and socioeconomic groups. Student data is stored anonymized in Supabase with row-level security. All AI explanations are labeled "AI Generated" in the UI.</textarea>
+          <button class="ai-suggest-btn" style="margin-top:10px" onclick="aiSuggest(this,'practices')">
+            <svg class="ai-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            AI: Suggest additional RAI practices for EdTech
+          </button>
+          <div class="ai-response-box" id="ai-practices"></div>
+        </div>
+        <div class="prov-card">
+          <div class="pc-header">
+            <div class="pc-icon" style="background:rgba(245,158,11,.1)">📜</div>
+            <div><div class="pc-title">Audit Trail</div><div class="pc-sub">Auto-logged provenance events</div></div>
+            <div class="pc-badge admin">Admin</div>
+          </div>
+          <div class="audit-trail" id="audit-trail">
+            <div class="audit-item"><div class="audit-icon teal">✓</div><div class="audit-text"><div class="audit-title">Provenance record saved</div><div class="audit-time">2 minutes ago • by Rafi Ahmed</div></div></div>
+            <div class="audit-item"><div class="audit-icon purple">🤖</div><div class="audit-text"><div class="audit-title">AI model updated: claude-sonnet-4 → claude-sonnet-4-20250514</div><div class="audit-time">1 day ago • auto-detected</div></div></div>
+            <div class="audit-item"><div class="audit-icon amber">⚡</div><div class="audit-text"><div class="audit-title">New MCP tool added: generate_quiz</div><div class="audit-time">3 days ago • by dev team</div></div></div>
+            <div class="audit-item"><div class="audit-icon coral">🔐</div><div class="audit-text"><div class="audit-title">Permission revoked: execute_shell</div><div class="audit-time">1 week ago • security review</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <button class="prov-save-btn" onclick="saveProvenance()">💾 Save Provenance Record</button>
+    </main>
+  </div>
+
+  <!-- ═══════════════ FAB ═══════════════ -->
+  <button class="fab" onclick="showScreen('ai')" title="Ask AI">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#060b14" stroke-width="2.5" stroke-linecap="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+  </button>
+
+  <!-- ═══════════════ BOTTOM NAV ═══════════════ -->
+  <nav class="bottom-nav" id="bottom-nav">
+    <button class="nav-item active" id="nav-home" onclick="showScreen('home');setNav('home')">
+      <svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span class="nav-label">Home</span>
+    </button>
+    <button class="nav-item" id="nav-subjects" onclick="showScreen('subjects');setNav('subjects')">
+      <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      <span class="nav-label">Subjects</span>
+    </button>
+    <button class="nav-item" id="nav-ai" onclick="showScreen('ai');setNav('ai')">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <span class="nav-label">AI Tutor</span>
+    </button>
+    <button class="nav-item" id="nav-quiz" onclick="showScreen('quiz');setNav('quiz')">
+      <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      <span class="nav-label">Quizzes</span>
+    </button>
+    <button class="nav-item" id="nav-insights" onclick="showScreen('insights');setNav('insights')">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      <span class="nav-label">Insights</span>
+    </button>
+    <button class="nav-item" id="nav-provenance" onclick="showScreen('provenance');setNav('provenance')">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <span class="nav-label">Provenance</span>
+    </button>
+  </nav>
+  <button class="nav-item" id="nav-provenance" onclick="showScreen('provenance'); setNav('provenance')">
+  <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+  <span class="nav-label">Provenance</span>
+</button>
+
+</div>
+<script>
+fetch('nextedu_provenance_dashboard.html')
+      .then(response => {
+        if (!response.ok) throw new Error('Dashboard file not found');
+        return response.text();
+      })
+      .then(html => {
+        document.getElementById('provenance-dashboard-root').innerHTML = html;
+        if (typeof init === "function") { init(); }
+      })
+      .catch(error => console.error('Error:', error));
+      </script>
+<!-- Scripts loaded last -->
+<script src="js/utils.js"></script>
+<script src="js/navigators.js"></script>
+<script src="js/quiz.js"></script>
+<script src="js/provenance.js"></script>
+</body>
+</html>

@@ -1,0 +1,524 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.pr{font-family:var(--font-sans);color:var(--color-text-primary);padding:1.25rem 0;max-width:680px}
+.top-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem}
+.top-title{font-size:17px;font-weight:500}
+.top-sub{font-size:12px;color:var(--color-text-secondary);margin-top:2px}
+.sb-chip{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#1D9E75;background:#E1F5EE;border-radius:20px;padding:3px 10px;font-weight:500}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.25rem}
+.stat{background:var(--color-background-secondary);border-radius:8px;padding:12px;text-align:center}
+.stat-n{font-size:22px;font-weight:500}
+.stat-l{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
+.tabs{display:flex;border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:1.25rem;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tb{padding:9px 14px;font-size:12px;font-weight:500;border:none;background:none;color:var(--color-text-secondary);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-0.5px;white-space:nowrap;transition:color .15s}
+.tb.on{color:#818cf8;border-bottom-color:#818cf8}
+.panel{display:none}
+.panel.on{display:block}
+.sec-hd{display:flex;align-items:center;gap:7px;margin-bottom:.75rem;margin-top:1rem;padding-bottom:.4rem;border-bottom:0.5px solid var(--color-border-tertiary)}
+.sec-hd:first-child{margin-top:0}
+.sec-lbl{font-size:11px;font-weight:500;color:var(--color-text-secondary);letter-spacing:.05em;text-transform:uppercase}
+.bdg{font-size:10px;padding:2px 7px;border-radius:20px;font-weight:500}
+.bdg-j{background:#EEEDFE;color:#3C3489}
+.bdg-t{background:#E1F5EE;color:#085041}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:12px;padding:1rem 1.1rem;margin-bottom:.6rem}
+.fl{display:flex;flex-direction:column;gap:6px}
+.fl-lbl{font-size:11px;color:var(--color-text-secondary);font-weight:500;display:flex;align-items:center;gap:4px}
+.tags{display:flex;flex-wrap:wrap;gap:5px;min-height:28px;align-items:center}
+.tg{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:20px;padding:3px 10px;font-size:12px;display:flex;align-items:center;gap:4px}
+.tg-x{cursor:pointer;color:var(--color-text-tertiary);font-size:13px;line-height:1}
+.tg-x:hover{color:#D85A30}
+.ti-row{display:flex;gap:6px;margin-top:5px}
+.ti-row input{flex:1;font-size:12px;padding:6px 9px;border:0.5px solid var(--color-border-secondary);border-radius:8px;background:var(--color-background-primary);color:var(--color-text-primary);outline:none}
+.ti-row input:focus{border-color:#818cf8}
+.ti-row button{font-size:11px;padding:6px 10px;border:0.5px solid var(--color-border-secondary);border-radius:8px;background:var(--color-background-secondary);color:var(--color-text-primary);cursor:pointer;white-space:nowrap}
+.ti-row button:hover{background:var(--color-background-tertiary)}
+textarea{width:100%;font-size:12px;padding:9px 10px;border:0.5px solid var(--color-border-secondary);border-radius:8px;background:var(--color-background-primary);color:var(--color-text-primary);outline:none;resize:vertical;font-family:var(--font-sans);line-height:1.6;min-height:70px}
+textarea:focus{border-color:#818cf8}
+select,input[type=text]{width:100%;font-size:12px;padding:7px 9px;border:0.5px solid var(--color-border-secondary);border-radius:8px;background:var(--color-background-primary);color:var(--color-text-primary);outline:none}
+select:focus,input[type=text]:focus{border-color:#818cf8}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.rai-wrap{display:flex;align-items:center;gap:10px;margin-top:6px}
+.rai-bg{flex:1;height:5px;background:var(--color-background-secondary);border-radius:99px;overflow:hidden}
+.rai-fill{height:100%;border-radius:99px;transition:width .4s,background .4s}
+.rai-n{font-size:20px;font-weight:500;min-width:36px;text-align:right}
+.mcp-r{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px}
+.mcp-r input{font-size:12px;padding:6px 9px;border:0.5px solid var(--color-border-secondary);border-radius:8px;background:var(--color-background-primary);color:var(--color-text-primary);outline:none}
+.add-btn{font-size:11px;padding:5px 10px;border:0.5px solid var(--color-border-secondary);border-radius:8px;background:var(--color-background-secondary);color:var(--color-text-primary);cursor:pointer;display:inline-flex;align-items:center;gap:4px}
+.add-btn:hover{background:var(--color-background-tertiary)}
+.pc{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:8px;padding:10px 12px;margin-bottom:6px}
+.pm{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.pt{font-size:12px;font-weight:500}
+.pp{font-size:11px;color:var(--color-text-secondary);font-family:var(--font-mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.adot{width:6px;height:6px;border-radius:50%;background:#1D9E75;display:inline-block;margin-right:3px}
+.ar{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:12px}
+.ar:last-child{border-bottom:none}
+.aa{font-weight:500;min-width:130px}
+.ad{color:var(--color-text-secondary);flex:1}
+.at{color:var(--color-text-tertiary);font-size:11px;white-space:nowrap}
+.pr-row{display:flex;align-items:center;gap:7px;margin-bottom:5px}
+.pr-row input[type=text]{flex:1}
+.tog{position:relative;width:34px;height:18px;flex-shrink:0}
+.tog input{opacity:0;width:0;height:0}
+.tog-s{position:absolute;inset:0;background:var(--color-background-secondary);border-radius:20px;cursor:pointer;border:0.5px solid var(--color-border-secondary);transition:.2s}
+.tog-s::after{content:'';position:absolute;width:12px;height:12px;background:white;border-radius:50%;top:2px;left:2px;transition:.2s}
+.tog input:checked+.tog-s{background:#818cf8;border-color:#818cf8}
+.tog input:checked+.tog-s::after{transform:translateX(16px)}
+.save-btn{width:100%;padding:11px;border:none;border-radius:8px;background:#818cf8;color:white;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;margin-top:1.5rem;transition:background .2s}
+.save-btn:hover{background:#6d75e0}
+.save-btn:disabled{background:var(--color-background-secondary);color:var(--color-text-tertiary);cursor:not-allowed}
+.toast{position:fixed;bottom:16px;right:16px;border-radius:8px;padding:9px 16px;font-size:12px;font-weight:500;display:flex;align-items:center;gap:7px;opacity:0;transform:translateY(6px);transition:all .25s;z-index:9999;pointer-events:none;color:white}
+.toast.show{opacity:1;transform:translateY(0)}
+.note{font-size:11px;color:var(--color-text-tertiary);padding:8px 10px;border:0.5px solid var(--color-border-tertiary);border-radius:8px;margin-bottom:1rem;display:flex;align-items:flex-start;gap:6px;line-height:1.5}
+.spin{width:12px;height:12px;border:2px solid var(--color-border-tertiary);border-top-color:#818cf8;border-radius:50%;animation:sp .8s linear infinite;flex-shrink:0}
+@keyframes sp{to{transform:rotate(360deg)}}
+.np-form{margin-top:.75rem}
+.np-form input,.np-form select{margin-bottom:6px}
+.np-btns{display:flex;gap:6px;justify-content:flex-end;margin-top:8px}
+.np-btns button{font-size:12px;padding:6px 12px;border-radius:8px;cursor:pointer;border:0.5px solid var(--color-border-secondary)}
+.np-save{background:#818cf8;color:white;border-color:#818cf8 !important;font-weight:500}
+.np-cancel{background:var(--color-background-secondary);color:var(--color-text-primary)}
+</style>
+
+<div class="pr">
+<h2 class="sr-only">NextEdu Provenance Transparency and Auditability</h2>
+
+<div class="top-bar">
+  <div>
+    <div class="top-title">Provenance &amp; Transparency</div>
+    <div class="top-sub">Track data sources, AI models, and responsible AI practices</div>
+  </div>
+  <span class="sb-chip" id="sb-status">
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><circle cx="5" cy="5" r="4" fill="#1D9E75"/></svg>
+    Supabase
+  </span>
+</div>
+
+<div id="conn-note" class="note" style="display:none">
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  <span id="conn-msg">Supabase unreachable — showing demo data. Add your URL &amp; anon key in Settings to persist changes.</span>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-n" id="s-src">0</div><div class="stat-l">Data sources</div></div>
+  <div class="stat"><div class="stat-n" id="s-mdl">0</div><div class="stat-l">AI models</div></div>
+  <div class="stat"><div class="stat-n" id="s-rai" style="color:#818cf8">0</div><div class="stat-l">RAI score</div></div>
+</div>
+
+<div class="tabs">
+  <button class="tb on" onclick="tab('data',this)">Data &amp; AI</button>
+  <button class="tb" onclick="tab('tooling',this)">Tooling</button>
+  <button class="tb" onclick="tab('mcp',this)">MCP</button>
+  <button class="tb" onclick="tab('prompts',this)">Prompts</button>
+  <button class="tb" onclick="tab('audit',this)">Audit log</button>
+</div>
+
+<!-- DATA & AI -->
+<div class="panel on" id="panel-data">
+  <div class="sec-hd"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg><span class="sec-lbl">Data sources</span><span class="bdg bdg-j">Judge + Admin</span></div>
+  <div class="card">
+    <div class="fl">
+      <div class="fl-lbl">APIs, datasets, scraped data</div>
+      <div class="tags" id="src-tags"></div>
+      <div class="ti-row"><input id="src-in" type="text" placeholder="e.g. NCTB Dataset, OpenAlex API..." /><button onclick="addTag('sources','src-in','src-tags')">+ Add</button></div>
+    </div>
+  </div>
+
+  <div class="sec-hd"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg><span class="sec-lbl">AI models</span><span class="bdg bdg-j">Judge + Admin</span></div>
+  <div class="card">
+    <div class="fl">
+      <div class="fl-lbl">Models used in this project</div>
+      <div class="tags" id="mdl-tags"></div>
+      <div class="ti-row"><input id="mdl-in" type="text" placeholder="e.g. claude-sonnet-4-20250514..." /><button onclick="addTag('models','mdl-in','mdl-tags')">+ Add</button></div>
+    </div>
+  </div>
+
+  <div class="sec-hd"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span class="sec-lbl">Responsible AI practices</span><span class="bdg bdg-j">Judge + Admin</span></div>
+  <div class="card">
+    <div class="fl">
+      <div class="fl-lbl">Bias mitigation, transparency, fairness</div>
+      <textarea id="rai-txt" placeholder="Describe your responsible AI practices..."></textarea>
+      <div class="rai-wrap">
+        <span style="font-size:11px;color:var(--color-text-secondary)">RAI score</span>
+        <div class="rai-bg"><div class="rai-fill" id="rai-fill" style="width:0%;background:#818cf8"></div></div>
+        <span class="rai-n" id="rai-num" style="color:#818cf8">0</span>
+        <input type="range" min="0" max="100" value="0" id="rai-sl" style="width:70px" oninput="setRai(this.value)" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOOLING -->
+<div class="panel" id="panel-tooling">
+  <div class="sec-hd"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg><span class="sec-lbl">IDE &amp; Deployment</span><span class="bdg bdg-t">Team only</span></div>
+  <div class="card">
+    <div class="grid2">
+      <div class="fl">
+        <div class="fl-lbl">IDE / Editor</div>
+        <select id="ide-sel">
+          <option value="">Select IDE...</option>
+          <option value="VS Code">VS Code</option>
+          <option value="Cursor">Cursor</option>
+          <option value="JetBrains">JetBrains</option>
+          <option value="Neovim">Neovim</option>
+          <option value="Windsurf">Windsurf</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="fl">
+        <div class="fl-lbl">Deployment method</div>
+        <input type="text" id="dep-in" placeholder="Vercel, AWS, Docker..." />
+      </div>
+    </div>
+    <div class="fl" style="margin-top:.75rem">
+      <div class="fl-lbl">Frameworks &amp; libraries</div>
+      <div class="tags" id="fw-tags"></div>
+      <div class="ti-row"><input id="fw-in" type="text" placeholder="React, Supabase, LangChain..." /><button onclick="addTag('frameworks','fw-in','fw-tags')">+ Add</button></div>
+    </div>
+    <div class="fl" style="margin-top:.75rem">
+      <div class="fl-lbl">Context / memory files</div>
+      <div class="tags" id="ctx-tags"></div>
+      <div class="ti-row"><input id="ctx-in" type="text" placeholder=".cursorrules, CLAUDE.md..." /><button onclick="addTag('contextFiles','ctx-in','ctx-tags')">+ Add</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- MCP -->
+<div class="panel" id="panel-mcp">
+  <div class="sec-hd"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#BA7517" stroke-width="2" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg><span class="sec-lbl">MCP servers</span><span class="bdg bdg-t">Team only</span></div>
+  <div class="card">
+    <div id="mcp-list"></div>
+    <button class="add-btn" onclick="addMcp()">+ Add server</button>
+  </div>
+
+  <div class="sec-hd" style="margin-top:.75rem"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#BA7517" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><span class="sec-lbl">Tools exposed</span></div>
+  <div class="card">
+    <div class="tags" id="tool-tags"></div>
+    <div class="ti-row"><input id="tool-in" type="text" placeholder="e.g. generate_quiz, search_nctb..." /><button onclick="addTag('tools','tool-in','tool-tags')">+ Add</button></div>
+  </div>
+
+  <div class="sec-hd" style="margin-top:.75rem"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#BA7517" stroke-width="2" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span class="sec-lbl">Permissions</span></div>
+  <div class="card">
+    <div id="perm-list"></div>
+    <button class="add-btn" onclick="addPerm()">+ Add permission</button>
+  </div>
+</div>
+
+<!-- PROMPTS -->
+<div class="panel" id="panel-prompts">
+  <div class="sec-hd"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f472b6" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span class="sec-lbl">Prompt library</span><span class="bdg bdg-t">Team only</span></div>
+  <div id="p-list"></div>
+  <button class="add-btn" onclick="toggleNpForm()">+ New prompt</button>
+  <div id="np-form" style="display:none" class="card np-form">
+    <div class="fl-lbl" style="margin-bottom:5px">New prompt</div>
+    <input type="text" id="np-title" placeholder="Prompt title..." />
+    <select id="np-type"><option value="system">System prompt</option><option value="user">User prompt</option></select>
+    <textarea id="np-content" placeholder="Prompt content..."></textarea>
+    <div class="np-btns">
+      <button class="np-cancel" onclick="toggleNpForm()">Cancel</button>
+      <button class="np-save" onclick="savePrompt()">Save prompt</button>
+    </div>
+  </div>
+</div>
+
+<!-- AUDIT -->
+<div class="panel" id="panel-audit">
+  <div class="sec-hd"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-secondary)" stroke-width="2" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg><span class="sec-lbl">Audit log</span></div>
+  <div class="card"><div id="audit-rows"><div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--color-text-secondary)"><div class="spin"></div>Loading...</div></div></div>
+</div>
+
+<button class="save-btn" id="sv-btn" onclick="save()">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" aria-hidden="true"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+  Save provenance record
+</button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+ const SUPABASE_URL = 'https://yrfwxfumkuowolshahte.supabase.co';
+
+const SUPABASE_KEY = 'sb_publishable_w4WnMs3TJLBBLLTSmprZlg_elNiAtUU';
+const USER_ID = 'de7835fd-93c2-474f-8014-0c957241ee06';
+
+const S = {
+  sources:[], models:[], frameworks:[], contextFiles:[],
+  tools:[], mcpServers:[], permissions:[],
+  raiText:'', raiScore:0, ide:'', deployment:'',
+  provId:null, prompts:[], connected:false
+};
+
+const DEMO = {
+  sources:['NCTB Curriculum Dataset','OpenAlex API','Supabase DB','Bangladesh Board Exams'],
+  models:['claude-sonnet-4-20250514','text-embedding-3-small'],
+  frameworks:['React','Next.js','Supabase','Tailwind CSS'],
+  contextFiles:['CLAUDE.md','.cursorrules'],
+  tools:['generate_quiz','search_nctb','fetch_profile'],
+  mcpServers:[{name:'NextEdu MCP',purpose:'Quiz generation & curriculum search'}],
+  permissions:[{name:'read_curriculum',granted:true},{name:'generate_quiz',granted:true},{name:'execute_shell',granted:false}],
+  raiScore:72,
+  raiText:'Bias mitigation via diverse NCTB curriculum sources. Student data anonymized before AI processing. No PII in prompts. Regular fairness audits on quiz generation outputs.',
+  ide:'Cursor', deployment:'Vercel',
+  prompts:[
+    {id:'p1',title:'Bangla Tutor System Prompt',type:'system',tag:'Production',is_active:true,content:'You are NextEdu AI tutor. Always respond in Bangla...'},
+    {id:'p2',title:'Quiz Generation Prompt',type:'user',tag:'Quiz Engine',is_active:false,content:'Generate {n} MCQ questions on topic "{topic}" for NCTB Class {class}...'},
+    {id:'p3',title:'Personality Detection',type:'system',tag:'Analytics',is_active:false,content:'Analyze student last 10 interactions and classify learning style...'}
+  ]
+};
+
+const DEMO_AUDIT = [
+  {action:'Provenance saved',detail:'Manual save — 4 sources, 2 models, RAI 72',created_at:new Date(Date.now()-172800000).toISOString()},
+  {action:'AI model updated',detail:'claude-sonnet-4 → claude-sonnet-4-20250514',created_at:new Date(Date.now()-259200000).toISOString()},
+  {action:'MCP tool added',detail:'generate_quiz added to MCP server',created_at:new Date(Date.now()-432000000).toISOString()},
+  {action:'Permission revoked',detail:'execute_shell removed — security review',created_at:new Date(Date.now()-604800000).toISOString()}
+];
+
+async function sbFetch(path, opts={}) {
+  if (!SUPABASE_URL || !SUPABASE_KEY) throw new Error('no-config');
+  const r = await fetch(SUPABASE_URL.replace(/\/$/, '') + '/rest/v1/' + path, {
+    headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':'application/json','Prefer':opts.prefer||'return=representation'},
+    ...opts
+  });
+  if (!r.ok) throw new Error(await r.text());
+  return r.json().catch(()=>null);
+}
+
+async function init() {
+  try {
+    const [prov, prompts, audit] = await Promise.all([
+      sbFetch('provenance?user_id=eq.'+USER_ID+'&limit=1'),
+      sbFetch('prompts?user_id=eq.'+USER_ID+'&order=created_at.desc'),
+      sbFetch('audit_log?user_id=eq.'+USER_ID+'&order=created_at.desc&limit=10')
+    ]);
+    S.connected = true;
+    document.getElementById('sb-status').innerHTML = '<svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" fill="#1D9E75"/></svg> Connected';
+    if (prov && prov.length) {
+      const p = prov[0]; S.provId = p.id;
+      S.sources = p.data_sources||[]; S.models = p.ai_models||[];
+      S.frameworks = p.frameworks||[]; S.contextFiles = p.context_files||[];
+      S.tools = p.tools_exposed||[]; S.raiText = p.rai_practices||'';
+      S.raiScore = p.rai_score||0; S.ide = p.ide||''; S.deployment = p.deployment||'';
+      S.mcpServers = Array.isArray(p.mcp_servers) ? p.mcp_servers : [];
+      try { S.permissions = p.permissions ? Object.entries(p.permissions).map(([k,v])=>({name:k,granted:v})) : []; } catch(e){S.permissions=[];}
+    } else { loadDemo(); }
+    S.prompts = prompts||[];
+    renderAll(); renderAudit(audit||[]);
+  } catch(e) {
+    loadDemo();
+    S.prompts = DEMO.prompts;
+    renderAll(); renderAudit(DEMO_AUDIT);
+    if (e.message !== 'no-config') {
+      document.getElementById('conn-note').style.display = 'flex';
+    } else {
+      document.getElementById('conn-note').style.display = 'flex';
+      document.getElementById('conn-msg').textContent = 'No Supabase config — showing demo data. Replace SUPABASE_URL and SUPABASE_KEY in the source to connect.';
+    }
+    document.getElementById('sb-status').style.background = '#FAEEDA';
+    document.getElementById('sb-status').style.color = '#BA7517';
+    document.getElementById('sb-status').innerHTML = '<svg width="8" height="8" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" fill="#BA7517"/></svg> Demo mode';
+  }
+}
+
+function loadDemo() {
+  Object.assign(S, {
+    sources:[...DEMO.sources], models:[...DEMO.models], frameworks:[...DEMO.frameworks],
+    contextFiles:[...DEMO.contextFiles], tools:[...DEMO.tools],
+    mcpServers:DEMO.mcpServers.map(x=>({...x})),
+    permissions:DEMO.permissions.map(x=>({...x})),
+    raiScore:DEMO.raiScore, raiText:DEMO.raiText, ide:DEMO.ide, deployment:DEMO.deployment
+  });
+}
+
+function renderAll() {
+  renderTags('src-tags', S.sources, 'sources');
+  renderTags('mdl-tags', S.models, 'models');
+  renderTags('fw-tags', S.frameworks, 'frameworks');
+  renderTags('ctx-tags', S.contextFiles, 'contextFiles');
+  renderTags('tool-tags', S.tools, 'tools');
+  document.getElementById('rai-txt').value = S.raiText;
+  document.getElementById('rai-sl').value = S.raiScore;
+  document.getElementById('ide-sel').value = S.ide;
+  document.getElementById('dep-in').value = S.deployment;
+  setRai(S.raiScore);
+  renderMcp(); renderPerms(); renderPrompts(); updateStats();
+}
+
+const tagInMap = {sources:'src-in',models:'mdl-in',frameworks:'fw-in',contextFiles:'ctx-in',tools:'tool-in'};
+const tagElMap = {sources:'src-tags',models:'mdl-tags',frameworks:'fw-tags',contextFiles:'ctx-tags',tools:'tool-tags'};
+
+function renderTags(elId, arr, key) {
+  const el = document.getElementById(elId);
+  if (!el) return;
+  if (!arr.length) { el.innerHTML = '<span style="font-size:11px;color:var(--color-text-tertiary)">None added</span>'; return; }
+  el.innerHTML = arr.map((t,i) =>
+    `<span class="tg">${t}<span class="tg-x" onclick="rmTag('${key}',${i})">×</span></span>`
+  ).join('');
+}
+
+function addTag(key, inId, tagId) {
+  const inp = document.getElementById(inId);
+  const v = inp.value.trim();
+  if (!v || S[key].includes(v)) { inp.value=''; return; }
+  S[key].push(v); inp.value='';
+  renderTags(tagId, S[key], key); updateStats();
+}
+
+function rmTag(key, i) {
+  S[key].splice(i,1);
+  renderTags(tagElMap[key], S[key], key); updateStats();
+}
+
+function setRai(v) {
+  v = parseInt(v); S.raiScore = v;
+  document.getElementById('rai-num').textContent = v;
+  document.getElementById('rai-fill').style.width = v + '%';
+  const c = v>=70?'#1D9E75':v>=40?'#BA7517':'#D85A30';
+  document.getElementById('rai-fill').style.background = c;
+  document.getElementById('rai-num').style.color = c;
+  document.getElementById('s-rai').style.color = c;
+  document.getElementById('s-rai').textContent = v;
+}
+
+function updateStats() {
+  document.getElementById('s-src').textContent = S.sources.length;
+  document.getElementById('s-mdl').textContent = S.models.length;
+}
+
+function renderMcp() {
+  document.getElementById('mcp-list').innerHTML = S.mcpServers.map((s,i)=>
+    `<div class="mcp-r">
+      <input type="text" placeholder="Server name" value="${s.name||''}" oninput="S.mcpServers[${i}].name=this.value" />
+      <input type="text" placeholder="Purpose" value="${s.purpose||''}" oninput="S.mcpServers[${i}].purpose=this.value" />
+    </div>`
+  ).join('');
+}
+function addMcp() { S.mcpServers.push({name:'',purpose:''}); renderMcp(); }
+
+function renderPerms() {
+  document.getElementById('perm-list').innerHTML = S.permissions.map((p,i)=>
+    `<div class="pr-row">
+      <input type="text" value="${p.name}" placeholder="Permission name" oninput="S.permissions[${i}].name=this.value" />
+      <label class="tog"><input type="checkbox" ${p.granted?'checked':''} onchange="S.permissions[${i}].granted=this.checked;this.closest('.pr-row').querySelector('.pg').textContent=this.checked?'Granted':'Revoked';this.closest('.pr-row').querySelector('.pg').style.color=this.checked?'#1D9E75':'#D85A30'" /><span class="tog-s"></span></label>
+      <span class="pg" style="font-size:11px;min-width:48px;color:${p.granted?'#1D9E75':'#D85A30'}">${p.granted?'Granted':'Revoked'}</span>
+    </div>`
+  ).join('');
+}
+function addPerm() { S.permissions.push({name:'',granted:true}); renderPerms(); }
+
+function renderPrompts() {
+  const tc = {system:'background:#EEEDFE;color:#3C3489',user:'background:#E1F5EE;color:#085041'};
+  document.getElementById('p-list').innerHTML = S.prompts.map(p=>
+    `<div class="pc">
+      <div class="pm">
+        <div style="display:flex;align-items:center;gap:6px">
+          ${p.is_active?'<span class="adot"></span>':''}
+          <span class="pt">${p.title}</span>
+          <span style="font-size:10px;padding:2px 6px;border-radius:20px;font-weight:500;${tc[p.type]||'background:var(--color-background-secondary);color:var(--color-text-secondary)'}">${p.type}</span>
+          ${p.tag?`<span style="font-size:10px;padding:2px 6px;border-radius:20px;background:var(--color-background-secondary);color:var(--color-text-secondary)">${p.tag}</span>`:''}
+        </div>
+        <span style="font-size:11px;color:var(--color-text-tertiary)">${p.is_active?'Active':'Inactive'}</span>
+      </div>
+      <div class="pp">${p.content}</div>
+    </div>`
+  ).join('') || '<p style="font-size:12px;color:var(--color-text-tertiary);padding:.5rem 0">No prompts yet.</p>';
+}
+
+function toggleNpForm() {
+  const f = document.getElementById('np-form');
+  f.style.display = f.style.display==='none' ? 'block' : 'none';
+}
+
+async function savePrompt() {
+  const title = document.getElementById('np-title').value.trim();
+  const content = document.getElementById('np-content').value.trim();
+  const type = document.getElementById('np-type').value;
+  if (!title||!content) { toast('Fill in title and content','warn'); return; }
+  const obj = {user_id:USER_ID,title,content,type,is_active:false};
+  try {
+    if (S.connected) {
+      const r = await sbFetch('prompts',{method:'POST',body:JSON.stringify(obj)});
+      S.prompts.unshift(r[0]);
+    } else { S.prompts.unshift({...obj,id:'local-'+Date.now()}); }
+  } catch(e) { S.prompts.unshift({...obj,id:'local-'+Date.now()}); }
+  renderPrompts(); toggleNpForm();
+  document.getElementById('np-title').value='';
+  document.getElementById('np-content').value='';
+  toast('Prompt saved');
+}
+
+function renderAudit(rows) {
+  const icons = {'Provenance saved':'💾','AI model updated':'🤖','MCP tool added':'🔌','Permission revoked':'🔒'};
+  document.getElementById('audit-rows').innerHTML = rows.map(r => {
+    const dt = new Date(r.created_at), ago = timeAgo(dt);
+    return `<div class="ar">
+      <span style="font-size:14px;flex-shrink:0">${icons[r.action]||'📋'}</span>
+      <span class="aa">${r.action}</span>
+      <span class="ad">${r.detail||''}</span>
+      <span class="at">${ago}</span>
+    </div>`;
+  }).join('') || '<p style="font-size:12px;color:var(--color-text-tertiary)">No audit records yet.</p>';
+}
+
+function timeAgo(d) {
+  const s = Math.floor((Date.now()-d)/1000);
+  if (s<60) return 'just now';
+  if (s<3600) return Math.floor(s/60)+'m ago';
+  if (s<86400) return Math.floor(s/3600)+'h ago';
+  return Math.floor(s/86400)+'d ago';
+}
+
+async function save() {
+  const btn = document.getElementById('sv-btn');
+  btn.disabled=true; btn.innerHTML='<div class="spin" style="border-color:rgba(255,255,255,0.3);border-top-color:white"></div> Saving...';
+  S.raiText = document.getElementById('rai-txt').value;
+  S.ide = document.getElementById('ide-sel').value;
+  S.deployment = document.getElementById('dep-in').value;
+  const perms = {};
+  S.permissions.forEach(p=>{ if(p.name) perms[p.name]=p.granted; });
+  const payload = {
+    user_id:USER_ID, data_sources:S.sources, ai_models:S.models,
+    frameworks:S.frameworks, context_files:S.contextFiles,
+    tools_exposed:S.tools, rai_practices:S.raiText, rai_score:S.raiScore,
+    ide:S.ide, deployment:S.deployment, mcp_servers:S.mcpServers,
+    permissions:perms, updated_at:new Date().toISOString()
+  };
+  try {
+    if (S.connected) {
+      if (S.provId) {
+        await sbFetch('provenance?id=eq.'+S.provId,{method:'PATCH',body:JSON.stringify(payload),prefer:'return=minimal'});
+      } else {
+        const r = await sbFetch('provenance',{method:'POST',body:JSON.stringify(payload)});
+        if (r&&r[0]) S.provId = r[0].id;
+      }
+      await sbFetch('audit_log',{method:'POST',body:JSON.stringify({user_id:USER_ID,action:'Provenance saved',detail:`${S.sources.length} sources, ${S.models.length} models, RAI ${S.raiScore}`})});
+      toast('Saved to Supabase');
+    } else {
+      toast('Demo mode — connect Supabase to persist','warn');
+    }
+  } catch(e) { toast('Save failed: '+e.message,'warn'); }
+  btn.disabled=false;
+  btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Save provenance record';
+}
+
+function tab(id, el) {
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('panel-'+id).classList.add('on');
+}
+
+function toast(msg, type) {
+  const t = document.getElementById('toast');
+  t.style.background = type==='warn' ? '#BA7517' : '#1D9E75';
+  t.textContent = (type==='warn'?'⚠ ':' ✓ ') + msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 3000);
+}
+
+document.querySelectorAll('.ti-row input').forEach(inp => {
+  inp.addEventListener('keydown', e => { if(e.key==='Enter'){e.preventDefault();inp.nextElementSibling.click();} });
+});
+
+init();
+</script>
