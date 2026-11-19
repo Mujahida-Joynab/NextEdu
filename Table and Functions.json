@@ -1,0 +1,578 @@
+[
+  {
+    "proname": "vector_avg",
+    "prosrc": "vector_avg"
+  },
+  {
+    "proname": "vector_combine",
+    "prosrc": "vector_combine"
+  },
+  {
+    "proname": "avg",
+    "prosrc": "aggregate_dummy"
+  },
+  {
+    "proname": "sum",
+    "prosrc": "aggregate_dummy"
+  },
+  {
+    "proname": "vector",
+    "prosrc": "vector"
+  },
+  {
+    "proname": "array_to_vector",
+    "prosrc": "array_to_vector"
+  },
+  {
+    "proname": "array_to_vector",
+    "prosrc": "array_to_vector"
+  },
+  {
+    "proname": "array_to_vector",
+    "prosrc": "array_to_vector"
+  },
+  {
+    "proname": "array_to_vector",
+    "prosrc": "array_to_vector"
+  },
+  {
+    "proname": "vector_to_float4",
+    "prosrc": "vector_to_float4"
+  },
+  {
+    "proname": "ivfflathandler",
+    "prosrc": "ivfflathandler"
+  },
+  {
+    "proname": "hnswhandler",
+    "prosrc": "hnswhandler"
+  },
+  {
+    "proname": "ivfflat_halfvec_support",
+    "prosrc": "ivfflat_halfvec_support"
+  },
+  {
+    "proname": "ivfflat_bit_support",
+    "prosrc": "ivfflat_bit_support"
+  },
+  {
+    "proname": "halfvec_recv",
+    "prosrc": "halfvec_recv"
+  },
+  {
+    "proname": "halfvec_send",
+    "prosrc": "halfvec_send"
+  },
+  {
+    "proname": "hnsw_halfvec_support",
+    "prosrc": "hnsw_halfvec_support"
+  },
+  {
+    "proname": "hnsw_bit_support",
+    "prosrc": "hnsw_bit_support"
+  },
+  {
+    "proname": "hnsw_sparsevec_support",
+    "prosrc": "hnsw_sparsevec_support"
+  },
+  {
+    "proname": "halfvec_in",
+    "prosrc": "halfvec_in"
+  },
+  {
+    "proname": "halfvec_out",
+    "prosrc": "halfvec_out"
+  },
+  {
+    "proname": "halfvec_typmod_in",
+    "prosrc": "halfvec_typmod_in"
+  },
+  {
+    "proname": "l2_distance",
+    "prosrc": "halfvec_l2_distance"
+  },
+  {
+    "proname": "inner_product",
+    "prosrc": "halfvec_inner_product"
+  },
+  {
+    "proname": "cosine_distance",
+    "prosrc": "halfvec_cosine_distance"
+  },
+  {
+    "proname": "l1_distance",
+    "prosrc": "halfvec_l1_distance"
+  },
+  {
+    "proname": "vector_dims",
+    "prosrc": "halfvec_vector_dims"
+  },
+  {
+    "proname": "l2_norm",
+    "prosrc": "halfvec_l2_norm"
+  },
+  {
+    "proname": "l2_normalize",
+    "prosrc": "halfvec_l2_normalize"
+  },
+  {
+    "proname": "binary_quantize",
+    "prosrc": "halfvec_binary_quantize"
+  },
+  {
+    "proname": "subvector",
+    "prosrc": "halfvec_subvector"
+  },
+  {
+    "proname": "halfvec_add",
+    "prosrc": "halfvec_add"
+  },
+  {
+    "proname": "halfvec_sub",
+    "prosrc": "halfvec_sub"
+  },
+  {
+    "proname": "halfvec_mul",
+    "prosrc": "halfvec_mul"
+  },
+  {
+    "proname": "halfvec_concat",
+    "prosrc": "halfvec_concat"
+  },
+  {
+    "proname": "halfvec_lt",
+    "prosrc": "halfvec_lt"
+  },
+  {
+    "proname": "halfvec_le",
+    "prosrc": "halfvec_le"
+  },
+  {
+    "proname": "halfvec_eq",
+    "prosrc": "halfvec_eq"
+  },
+  {
+    "proname": "halfvec_ne",
+    "prosrc": "halfvec_ne"
+  },
+  {
+    "proname": "halfvec_ge",
+    "prosrc": "halfvec_ge"
+  },
+  {
+    "proname": "halfvec_gt",
+    "prosrc": "halfvec_gt"
+  },
+  {
+    "proname": "halfvec_cmp",
+    "prosrc": "halfvec_cmp"
+  },
+  {
+    "proname": "halfvec_l2_squared_distance",
+    "prosrc": "halfvec_l2_squared_distance"
+  },
+  {
+    "proname": "halfvec_negative_inner_product",
+    "prosrc": "halfvec_negative_inner_product"
+  },
+  {
+    "proname": "halfvec_spherical_distance",
+    "prosrc": "halfvec_spherical_distance"
+  },
+  {
+    "proname": "halfvec_accum",
+    "prosrc": "halfvec_accum"
+  },
+  {
+    "proname": "halfvec_avg",
+    "prosrc": "halfvec_avg"
+  },
+  {
+    "proname": "halfvec_combine",
+    "prosrc": "vector_combine"
+  },
+  {
+    "proname": "avg",
+    "prosrc": "aggregate_dummy"
+  },
+  {
+    "proname": "sum",
+    "prosrc": "aggregate_dummy"
+  },
+  {
+    "proname": "halfvec",
+    "prosrc": "halfvec"
+  },
+  {
+    "proname": "halfvec_to_vector",
+    "prosrc": "halfvec_to_vector"
+  },
+  {
+    "proname": "vector_to_halfvec",
+    "prosrc": "vector_to_halfvec"
+  },
+  {
+    "proname": "array_to_halfvec",
+    "prosrc": "array_to_halfvec"
+  },
+  {
+    "proname": "array_to_halfvec",
+    "prosrc": "array_to_halfvec"
+  },
+  {
+    "proname": "array_to_halfvec",
+    "prosrc": "array_to_halfvec"
+  },
+  {
+    "proname": "array_to_halfvec",
+    "prosrc": "array_to_halfvec"
+  },
+  {
+    "proname": "halfvec_to_float4",
+    "prosrc": "halfvec_to_float4"
+  },
+  {
+    "proname": "hamming_distance",
+    "prosrc": "hamming_distance"
+  },
+  {
+    "proname": "jaccard_distance",
+    "prosrc": "jaccard_distance"
+  },
+  {
+    "proname": "sparsevec_in",
+    "prosrc": "sparsevec_in"
+  },
+  {
+    "proname": "sparsevec_out",
+    "prosrc": "sparsevec_out"
+  },
+  {
+    "proname": "sparsevec_typmod_in",
+    "prosrc": "sparsevec_typmod_in"
+  },
+  {
+    "proname": "sparsevec_recv",
+    "prosrc": "sparsevec_recv"
+  },
+  {
+    "proname": "vector_le",
+    "prosrc": "vector_le"
+  },
+  {
+    "proname": "vector_eq",
+    "prosrc": "vector_eq"
+  },
+  {
+    "proname": "vector_ne",
+    "prosrc": "vector_ne"
+  },
+  {
+    "proname": "vector_ge",
+    "prosrc": "vector_ge"
+  },
+  {
+    "proname": "vector_gt",
+    "prosrc": "vector_gt"
+  },
+  {
+    "proname": "vector_cmp",
+    "prosrc": "vector_cmp"
+  },
+  {
+    "proname": "vector_l2_squared_distance",
+    "prosrc": "vector_l2_squared_distance"
+  },
+  {
+    "proname": "vector_negative_inner_product",
+    "prosrc": "vector_negative_inner_product"
+  },
+  {
+    "proname": "vector_spherical_distance",
+    "prosrc": "vector_spherical_distance"
+  },
+  {
+    "proname": "vector_accum",
+    "prosrc": "vector_accum"
+  },
+  {
+    "proname": "vector_in",
+    "prosrc": "vector_in"
+  },
+  {
+    "proname": "vector_out",
+    "prosrc": "vector_out"
+  },
+  {
+    "proname": "vector_typmod_in",
+    "prosrc": "vector_typmod_in"
+  },
+  {
+    "proname": "vector_recv",
+    "prosrc": "vector_recv"
+  },
+  {
+    "proname": "vector_send",
+    "prosrc": "vector_send"
+  },
+  {
+    "proname": "l2_distance",
+    "prosrc": "l2_distance"
+  },
+  {
+    "proname": "inner_product",
+    "prosrc": "inner_product"
+  },
+  {
+    "proname": "cosine_distance",
+    "prosrc": "cosine_distance"
+  },
+  {
+    "proname": "l1_distance",
+    "prosrc": "l1_distance"
+  },
+  {
+    "proname": "vector_dims",
+    "prosrc": "vector_dims"
+  },
+  {
+    "proname": "vector_norm",
+    "prosrc": "vector_norm"
+  },
+  {
+    "proname": "l2_normalize",
+    "prosrc": "l2_normalize"
+  },
+  {
+    "proname": "binary_quantize",
+    "prosrc": "binary_quantize"
+  },
+  {
+    "proname": "subvector",
+    "prosrc": "subvector"
+  },
+  {
+    "proname": "vector_add",
+    "prosrc": "vector_add"
+  },
+  {
+    "proname": "vector_sub",
+    "prosrc": "vector_sub"
+  },
+  {
+    "proname": "vector_mul",
+    "prosrc": "vector_mul"
+  },
+  {
+    "proname": "vector_concat",
+    "prosrc": "vector_concat"
+  },
+  {
+    "proname": "vector_lt",
+    "prosrc": "vector_lt"
+  },
+  {
+    "proname": "sparsevec_send",
+    "prosrc": "sparsevec_send"
+  },
+  {
+    "proname": "l2_distance",
+    "prosrc": "sparsevec_l2_distance"
+  },
+  {
+    "proname": "inner_product",
+    "prosrc": "sparsevec_inner_product"
+  },
+  {
+    "proname": "cosine_distance",
+    "prosrc": "sparsevec_cosine_distance"
+  },
+  {
+    "proname": "l1_distance",
+    "prosrc": "sparsevec_l1_distance"
+  },
+  {
+    "proname": "l2_norm",
+    "prosrc": "sparsevec_l2_norm"
+  },
+  {
+    "proname": "l2_normalize",
+    "prosrc": "sparsevec_l2_normalize"
+  },
+  {
+    "proname": "sparsevec_lt",
+    "prosrc": "sparsevec_lt"
+  },
+  {
+    "proname": "sparsevec_le",
+    "prosrc": "sparsevec_le"
+  },
+  {
+    "proname": "sparsevec_eq",
+    "prosrc": "sparsevec_eq"
+  },
+  {
+    "proname": "sparsevec_ne",
+    "prosrc": "sparsevec_ne"
+  },
+  {
+    "proname": "sparsevec_ge",
+    "prosrc": "sparsevec_ge"
+  },
+  {
+    "proname": "sparsevec_gt",
+    "prosrc": "sparsevec_gt"
+  },
+  {
+    "proname": "sparsevec_cmp",
+    "prosrc": "sparsevec_cmp"
+  },
+  {
+    "proname": "sparsevec_l2_squared_distance",
+    "prosrc": "sparsevec_l2_squared_distance"
+  },
+  {
+    "proname": "sparsevec_negative_inner_product",
+    "prosrc": "sparsevec_negative_inner_product"
+  },
+  {
+    "proname": "sparsevec",
+    "prosrc": "sparsevec"
+  },
+  {
+    "proname": "vector_to_sparsevec",
+    "prosrc": "vector_to_sparsevec"
+  },
+  {
+    "proname": "sparsevec_to_vector",
+    "prosrc": "sparsevec_to_vector"
+  },
+  {
+    "proname": "halfvec_to_sparsevec",
+    "prosrc": "halfvec_to_sparsevec"
+  },
+  {
+    "proname": "sparsevec_to_halfvec",
+    "prosrc": "sparsevec_to_halfvec"
+  },
+  {
+    "proname": "array_to_sparsevec",
+    "prosrc": "array_to_sparsevec"
+  },
+  {
+    "proname": "array_to_sparsevec",
+    "prosrc": "array_to_sparsevec"
+  },
+  {
+    "proname": "array_to_sparsevec",
+    "prosrc": "array_to_sparsevec"
+  },
+  {
+    "proname": "array_to_sparsevec",
+    "prosrc": "array_to_sparsevec"
+  },
+  {
+    "proname": "search_curriculum",
+    "prosrc": "\r\nbegin\r\n    return query\r\n    select\r\n        c.id,\r\n        c.subject,\r\n        c.grade,\r\n        c.content,\r\n        1 - (c.embedding <=> query_embedding) as similarity\r\n    from curriculum_chunks c\r\n    where\r\n        (subject_filter is null or c.subject = subject_filter)\r\n        and (grade_filter is null or c.grade = grade_filter)\r\n    order by c.embedding <=> query_embedding\r\n    limit match_count;\r\nend;\r\n"
+  },
+  {
+    "proname": "keyword_search_chunks",
+    "prosrc": "\r\nBEGIN\r\n    RETURN QUERY\r\n    SELECT\r\n        cc.id,\r\n        cc.chunk_id,\r\n        cc.content,\r\n        cc.chunk_index,\r\n        cc.metadata,\r\n        ts_rank(\r\n            to_tsvector('english', cc.content),\r\n            plainto_tsquery('english', search_query)\r\n        ) AS rank\r\n    FROM curriculum_chunks cc\r\n    WHERE to_tsvector('english', cc.content) @@ plainto_tsquery('english', search_query)\r\n    ORDER BY rank DESC\r\n    LIMIT limit_count;\r\nEND;\r\n"
+  },
+  {
+    "proname": "irt_probability",
+    "prosrc": "\r\nDECLARE\r\n    z FLOAT;\r\nBEGIN\r\n    z := discrimination * (theta - difficulty);\r\n    z := GREATEST(-30, LEAST(30, z));\r\n    RETURN 1.0 / (1.0 + EXP(-z));\r\nEND;\r\n"
+  },
+  {
+    "proname": "update_theta",
+    "prosrc": "\r\nDECLARE\r\n    p FLOAT;\r\n    delta FLOAT;\r\n    new_theta FLOAT;\r\nBEGIN\r\n    p := irt_probability(current_theta, question_difficulty);\r\n    \r\n    IF was_correct THEN\r\n        delta := learning_rate * (1 - p) * ABS(question_difficulty);\r\n    ELSE\r\n        delta := -learning_rate * p * ABS(question_difficulty);\r\n    END IF;\r\n    \r\n    new_theta := current_theta + delta;\r\n    new_theta := GREATEST(-3.0, LEAST(3.0, new_theta));\r\n    \r\n    RETURN new_theta;\r\nEND;\r\n"
+  },
+  {
+    "proname": "get_difficulty_from_theta",
+    "prosrc": "\r\nBEGIN\r\n    IF theta < -1.0 THEN\r\n        RETURN 'easy';\r\n    ELSIF theta < 1.0 THEN\r\n        RETURN 'medium';\r\n    ELSE\r\n        RETURN 'hard';\r\n    END IF;\r\nEND;\r\n"
+  },
+  {
+    "proname": "get_career_pathway_recommendation",
+    "prosrc": "\r\nBEGIN\r\n    RETURN QUERY\r\n    WITH subject_thetas AS (\r\n        SELECT \r\n            subject,\r\n            MAX(theta) AS max_theta\r\n        FROM quiz_attempts\r\n        WHERE user_id = p_user_id\r\n        GROUP BY subject\r\n        ORDER BY MAX(theta) DESC\r\n        LIMIT 1\r\n    )\r\n    SELECT \r\n        cp.title,\r\n        cp.title_bn,\r\n        cp.description,\r\n        cp.description_bn,\r\n        cp.icon,\r\n        cp.color,\r\n        st.subject,\r\n        st.max_theta,\r\n        cp.suggested_topics\r\n    FROM subject_thetas st\r\n    CROSS JOIN career_pathways cp\r\n    WHERE st.subject = ANY(cp.required_subjects)\r\n    LIMIT 1;\r\nEND;\r\n"
+  },
+  {
+    "proname": "irt_probability",
+    "prosrc": "\r\nDECLARE\r\n    z NUMERIC;\r\nBEGIN\r\n    z := discrimination * (theta - difficulty);\r\n    z := GREATEST(-30, LEAST(30, z));\r\n    RETURN 1.0 / (1.0 + EXP(-z));\r\nEND;\r\n"
+  },
+  {
+    "proname": "update_theta",
+    "prosrc": "\r\nDECLARE\r\n    p NUMERIC;\r\n    delta NUMERIC;\r\n    new_theta NUMERIC;\r\nBEGIN\r\n    p := irt_probability(current_theta, question_difficulty);\r\n    \r\n    IF was_correct THEN\r\n        delta := learning_rate * (1 - p) * ABS(question_difficulty);\r\n    ELSE\r\n        delta := -learning_rate * p * ABS(question_difficulty);\r\n    END IF;\r\n    \r\n    new_theta := current_theta + delta;\r\n    new_theta := GREATEST(-3.0, LEAST(3.0, new_theta));\r\n    \r\n    RETURN new_theta;\r\nEND;\r\n"
+  },
+  {
+    "proname": "get_difficulty_from_theta",
+    "prosrc": "\r\nBEGIN\r\n    IF theta < -1.0 THEN\r\n        RETURN 'easy';\r\n    ELSIF theta < 1.0 THEN\r\n        RETURN 'medium';\r\n    ELSE\r\n        RETURN 'hard';\r\n    END IF;\r\nEND;\r\n"
+  },
+  {
+    "proname": "get_irt_difficulty_value",
+    "prosrc": "\r\nBEGIN\r\n    RETURN CASE difficulty_level\r\n        WHEN 'easy' THEN -1.5\r\n        WHEN 'medium' THEN 0.0\r\n        WHEN 'hard' THEN 1.5\r\n        ELSE 0.0\r\n    END;\r\nEND;\r\n"
+  },
+  {
+    "proname": "process_quiz_answer",
+    "prosrc": "\r\nDECLARE\r\n    v_current_theta NUMERIC;\r\n    v_question_difficulty_value NUMERIC;\r\n    v_new_theta NUMERIC;\r\n    v_score INT;\r\n    v_xp_earned INT;\r\n    v_current_xp INT;\r\n    v_new_xp INT;\r\n    v_current_level INT;\r\n    v_new_level INT;\r\n    v_quiz_id UUID;\r\n    v_result JSON;\r\nBEGIN\r\n    -- Get current theta\r\n    SELECT theta INTO v_current_theta\r\n    FROM quiz_attempts\r\n    WHERE user_id = p_user_id AND subject = p_subject\r\n    ORDER BY created_at DESC\r\n    LIMIT 1;\r\n    \r\n    IF v_current_theta IS NULL THEN\r\n        v_current_theta := 0.0;\r\n    END IF;\r\n    \r\n    -- Get difficulty value\r\n    v_question_difficulty_value := get_irt_difficulty_value(p_question_difficulty);\r\n    \r\n    -- Update theta\r\n    v_new_theta := update_theta(\r\n        v_current_theta,\r\n        v_question_difficulty_value,\r\n        p_was_correct\r\n    );\r\n    \r\n    -- Calculate score (100 for correct, 0 for wrong)\r\n    IF p_was_correct THEN\r\n        v_score := 100;\r\n        v_xp_earned := 10;\r\n    ELSE\r\n        v_score := 0;\r\n        v_xp_earned := 5;\r\n    END IF;\r\n    \r\n    -- Update profile XP and Level\r\n    SELECT COALESCE(xp_total, 0), COALESCE(level, 1) INTO v_current_xp, v_current_level\r\n    FROM profiles\r\n    WHERE id = p_user_id;\r\n    \r\n    v_new_xp := v_current_xp + v_xp_earned;\r\n    v_new_level := 1 + (v_new_xp / 500);\r\n    \r\n    UPDATE profiles\r\n    SET \r\n        xp_total = v_new_xp,\r\n        level = v_new_level,\r\n        updated_at = NOW()\r\n    WHERE id = p_user_id;\r\n    \r\n    -- Save to quiz_attempts with all columns\r\n    INSERT INTO quiz_attempts (\r\n        user_id, \r\n        subject, \r\n        topic, \r\n        score,\r\n        total_q,\r\n        xp_earned, \r\n        theta, \r\n        created_at\r\n    ) VALUES (\r\n        p_user_id, \r\n        p_subject, \r\n        p_topic,\r\n        v_score,\r\n        1, \r\n        v_xp_earned, \r\n        v_new_theta, \r\n        NOW()\r\n    )\r\n    RETURNING id INTO v_quiz_id;\r\n    \r\n    -- Return result\r\n    v_result := json_build_object(\r\n        'quiz_id', v_quiz_id,\r\n        'old_theta', v_current_theta,\r\n        'new_theta', v_new_theta,\r\n        'theta_change', v_new_theta - v_current_theta,\r\n        'score', v_score,\r\n        'xp_earned', v_xp_earned,\r\n        'total_xp', v_new_xp,\r\n        'level', v_new_level,\r\n        'was_correct', p_was_correct\r\n    );\r\n    \r\n    RETURN v_result;\r\nEND;\r\n"
+  },
+  {
+    "proname": "get_student_theta",
+    "prosrc": "\r\nBEGIN\r\n    RETURN QUERY\r\n    SELECT \r\n        COALESCE(MAX(qa.theta), 0.0) AS theta,\r\n        MAX(qa.created_at) AS last_attempt_date,\r\n        COUNT(*) AS total_attempts,\r\n        ROUND(AVG(CASE WHEN qa.score >= 50 THEN 100 ELSE 0 END), 2) AS success_rate\r\n    FROM quiz_attempts qa\r\n    WHERE qa.user_id = p_user_id AND qa.subject = p_subject;\r\nEND;\r\n"
+  },
+  {
+    "proname": "get_next_question_difficulty",
+    "prosrc": "\r\nDECLARE\r\n    v_theta NUMERIC;\r\n    v_difficulty_level TEXT;\r\n    v_difficulty_value NUMERIC;\r\nBEGIN\r\n    SELECT qa.theta INTO v_theta\r\n    FROM quiz_attempts qa\r\n    WHERE qa.user_id = p_user_id AND qa.subject = p_subject\r\n    ORDER BY qa.created_at DESC\r\n    LIMIT 1;\r\n    \r\n    IF v_theta IS NULL THEN\r\n        v_theta := 0.0;\r\n    END IF;\r\n    \r\n    v_difficulty_level := get_difficulty_from_theta(v_theta);\r\n    v_difficulty_value := get_irt_difficulty_value(v_difficulty_level);\r\n    \r\n    RETURN QUERY\r\n    SELECT \r\n        v_difficulty_level,\r\n        v_difficulty_value,\r\n        v_theta,\r\n        CASE \r\n            WHEN v_theta < -1.0 THEN 'Student struggling - provide easy questions'\r\n            WHEN v_theta < 1.0 THEN 'Student at average level - provide medium questions'\r\n            ELSE 'Student excelling - challenge with hard questions'\r\n        END;\r\nEND;\r\n"
+  },
+  {
+    "proname": "process_quiz_answer_with_emotion",
+    "prosrc": "\r\nDECLARE\r\n    v_current_theta NUMERIC;\r\n    v_question_difficulty_value NUMERIC;\r\n    v_new_theta NUMERIC;\r\n    v_score INT;\r\n    v_xp_earned INT;\r\n    v_current_xp INT;\r\n    v_new_xp INT;\r\n    v_current_level INT;\r\n    v_new_level INT;\r\n    v_quiz_id UUID;\r\n    v_result JSON;\r\nBEGIN\r\n    -- Get current theta\r\n    SELECT theta INTO v_current_theta\r\n    FROM quiz_attempts\r\n    WHERE user_id = p_user_id AND subject = p_subject\r\n    ORDER BY created_at DESC\r\n    LIMIT 1;\r\n    \r\n    IF v_current_theta IS NULL THEN\r\n        v_current_theta := 0.0;\r\n    END IF;\r\n    \r\n    -- Get difficulty value\r\n    v_question_difficulty_value := get_irt_difficulty_value(p_question_difficulty);\r\n    \r\n    -- Update theta\r\n    v_new_theta := update_theta(\r\n        v_current_theta,\r\n        v_question_difficulty_value,\r\n        p_was_correct\r\n    );\r\n    \r\n    -- Calculate score and XP\r\n    IF p_was_correct THEN\r\n        v_score := 100;\r\n        v_xp_earned := 10;\r\n    ELSE\r\n        v_score := 0;\r\n        v_xp_earned := 5;\r\n    END IF;\r\n    \r\n    -- Update profile XP and Level\r\n    SELECT COALESCE(xp_total, 0), COALESCE(level, 1) INTO v_current_xp, v_current_level\r\n    FROM profiles\r\n    WHERE id = p_user_id;\r\n    \r\n    v_new_xp := v_current_xp + v_xp_earned;\r\n    v_new_level := 1 + (v_new_xp / 500);\r\n    \r\n    UPDATE profiles\r\n    SET \r\n        xp_total = v_new_xp,\r\n        level = v_new_level,\r\n        updated_at = NOW()\r\n    WHERE id = p_user_id;\r\n    \r\n    -- Save to quiz_attempts with emotion\r\n    INSERT INTO quiz_attempts (\r\n        user_id, subject, topic, score, total_q,\r\n        xp_earned, theta, emotion_state, created_at\r\n    ) VALUES (\r\n        p_user_id, p_subject, p_topic,\r\n        v_score, 1, v_xp_earned, v_new_theta, \r\n        p_emotion_state, NOW()\r\n    )\r\n    RETURNING id INTO v_quiz_id;\r\n    \r\n    -- Return result\r\n    v_result := json_build_object(\r\n        'quiz_id', v_quiz_id,\r\n        'old_theta', v_current_theta,\r\n        'new_theta', v_new_theta,\r\n        'theta_change', v_new_theta - v_current_theta,\r\n        'score', v_score,\r\n        'xp_earned', v_xp_earned,\r\n        'total_xp', v_new_xp,\r\n        'level', v_new_level,\r\n        'was_correct', p_was_correct,\r\n        'emotion_state', p_emotion_state\r\n    );\r\n    \r\n    RETURN v_result;\r\nEND;\r\n"
+  },
+  {
+    "proname": "get_top_predicted_topics",
+    "prosrc": "\r\nBEGIN\r\n    -- First, calculate and store predictions\r\n    INSERT INTO exam_predictions (subject, topic, probability, recommendation, year)\r\n    SELECT \r\n        p_subject,\r\n        t.topic,\r\n        calculate_exam_priority(p_subject, t.topic, p_year) AS prob,\r\n        CASE \r\n            WHEN calculate_exam_priority(p_subject, t.topic, p_year) > 0.75 THEN 'Must Read - High probability'\r\n            WHEN calculate_exam_priority(p_subject, t.topic, p_year) > 0.5 THEN 'Important - Likely to appear'\r\n            ELSE 'Review if time permits'\r\n        END AS recommendation,\r\n        p_year\r\n    FROM (SELECT DISTINCT topic FROM exam_question_data WHERE subject = p_subject) t\r\n    ON CONFLICT (subject, topic, year) DO UPDATE\r\n    SET probability = EXCLUDED.probability,\r\n        recommendation = EXCLUDED.recommendation;\r\n    \r\n    -- Return top predictions\r\n    RETURN QUERY\r\n    SELECT \r\n        ep.topic,\r\n        ep.probability,\r\n        ep.recommendation,\r\n        ROW_NUMBER() OVER (ORDER BY ep.probability DESC)::INTEGER AS rank\r\n    FROM exam_predictions ep\r\n    WHERE ep.subject = p_subject AND ep.year = p_year\r\n    ORDER BY ep.probability DESC\r\n    LIMIT p_limit;\r\nEND;\r\n"
+  },
+  {
+    "proname": "get_top_predicted_topics_simple",
+    "prosrc": "\r\nBEGIN\r\n    RETURN QUERY\r\n    SELECT \r\n        DISTINCT eqd.topic,\r\n        calculate_exam_priority(p_subject, eqd.topic, 2025) AS priority\r\n    FROM exam_question_data eqd\r\n    WHERE eqd.subject = p_subject\r\n    ORDER BY priority DESC\r\n    LIMIT p_limit;\r\nEND;\r\n"
+  },
+  {
+    "proname": "calculate_exam_priority",
+    "prosrc": "\r\nDECLARE\r\n    v_recency_score NUMERIC := 0;\r\n    v_frequency_3yr INTEGER := 0;\r\n    v_years_since_last INTEGER := 5;\r\n    v_chapter_weight INTEGER := 3;\r\n    v_priority NUMERIC;\r\n    v_record RECORD;\r\nBEGIN\r\n    -- Calculate recency score (weighted by year)\r\n    FOR v_record IN\r\n        SELECT year, appeared,\r\n            CASE year\r\n                WHEN 2024 THEN 1.0\r\n                WHEN 2023 THEN 0.8\r\n                WHEN 2022 THEN 0.6\r\n                WHEN 2021 THEN 0.4\r\n                WHEN 2020 THEN 0.2\r\n                ELSE 0.0\r\n            END AS weight\r\n        FROM exam_question_data\r\n        WHERE subject = p_subject AND topic = p_topic\r\n        ORDER BY year DESC\r\n    LOOP\r\n        IF v_record.appeared THEN\r\n            v_recency_score := v_recency_score + v_record.weight;\r\n            v_years_since_last := 0;\r\n        ELSE\r\n            v_years_since_last := v_years_since_last + 1;\r\n        END IF;\r\n    END LOOP;\r\n    \r\n    -- Calculate 3-year frequency\r\n    SELECT COUNT(*) INTO v_frequency_3yr\r\n    FROM exam_question_data\r\n    WHERE subject = p_subject \r\n        AND topic = p_topic\r\n        AND year >= p_current_year - 3\r\n        AND appeared = TRUE;\r\n    \r\n    -- Get chapter weight\r\n    SELECT COALESCE(chapter_weight, 3) INTO v_chapter_weight\r\n    FROM exam_question_data\r\n    WHERE subject = p_subject AND topic = p_topic\r\n    LIMIT 1;\r\n    \r\n    -- Calculate priority\r\n    v_priority := (\r\n        (v_recency_score * 0.4) +\r\n        (v_frequency_3yr::NUMERIC * 0.3 / 3.0) +\r\n        ((5 - LEAST(v_years_since_last, 5))::NUMERIC * 0.1 / 5.0) +\r\n        (v_chapter_weight::NUMERIC * 0.2 / 5.0)\r\n    );\r\n    \r\n    -- Normalize to 0-1 range\r\n    v_priority := LEAST(1.0, GREATEST(0.1, v_priority));\r\n    \r\n    RETURN v_priority;\r\nEND;\r\n"
+  },
+  {
+    "proname": "get_top_predicted_topics_full",
+    "prosrc": "\r\nBEGIN\r\n    -- Clear old predictions for this subject/year\r\n    DELETE FROM exam_predictions \r\n    WHERE subject = p_subject AND year = p_year;\r\n    \r\n    -- Insert new predictions\r\n    INSERT INTO exam_predictions (subject, topic, probability, recommendation, year)\r\n    SELECT \r\n        p_subject,\r\n        eqd.topic,\r\n        calculate_exam_priority(p_subject, eqd.topic, p_year)::NUMERIC,\r\n        CASE \r\n            WHEN calculate_exam_priority(p_subject, eqd.topic, p_year) > 0.75 THEN 'Must Read - High probability'\r\n            WHEN calculate_exam_priority(p_subject, eqd.topic, p_year) > 0.5 THEN 'Important - Likely to appear'\r\n            ELSE 'Review if time permits'\r\n        END,\r\n        p_year\r\n    FROM (SELECT DISTINCT topic FROM exam_question_data WHERE subject = p_subject) eqd;\r\n    \r\n    -- Return results with proper casting\r\n    RETURN QUERY\r\n    SELECT \r\n        ep.topic::TEXT,\r\n        ep.probability::NUMERIC,\r\n        ep.recommendation::TEXT,\r\n        ROW_NUMBER() OVER (ORDER BY ep.probability DESC)::INTEGER\r\n    FROM exam_predictions ep\r\n    WHERE ep.subject = p_subject AND ep.year = p_year\r\n    ORDER BY ep.probability DESC\r\n    LIMIT p_limit;\r\nEND;\r\n"
+  },
+  {
+    "proname": "get_current_exam_readiness",
+    "prosrc": "\r\nDECLARE\r\n    v_latest_year INTEGER;\r\nBEGIN\r\n    -- Get the latest year with predictions\r\n    SELECT MAX(year) INTO v_latest_year\r\n    FROM exam_predictions\r\n    WHERE subject = p_subject;\r\n    \r\n    IF v_latest_year IS NULL THEN\r\n        RETURN QUERY SELECT 0.0::NUMERIC, 0, 0, '{}'::TEXT[], 0;\r\n        RETURN;\r\n    END IF;\r\n    \r\n    RETURN QUERY\r\n    SELECT \r\n        er.readiness_percent,\r\n        er.topics_mastered,\r\n        er.total_predicted_topics,\r\n        er.weak_topics,\r\n        v_latest_year\r\n    FROM get_exam_readiness_score(p_user_id, p_subject, v_latest_year) er;\r\nEND;\r\n"
+  },
+  {
+    "proname": "get_exam_readiness_score",
+    "prosrc": "\r\nDECLARE\r\n    v_total_topics INTEGER;\r\n    v_mastered_count INTEGER := 0;\r\n    v_weak_topics TEXT[] := '{}';\r\n    v_predicted_topic TEXT;\r\n    v_quiz_topic TEXT;\r\n    v_quiz_score INTEGER;\r\nBEGIN\r\n    -- Get total predicted topics for this subject and year\r\n    SELECT COUNT(*) INTO v_total_topics\r\n    FROM exam_predictions\r\n    WHERE subject = p_subject AND year = p_year;\r\n    \r\n    -- If no predictions exist, return default values\r\n    IF v_total_topics = 0 THEN\r\n        RETURN QUERY SELECT 0.0::NUMERIC, 0, 0, '{}'::TEXT[];\r\n        RETURN;\r\n    END IF;\r\n    \r\n    -- Check each predicted topic\r\n    FOR v_predicted_topic IN\r\n        SELECT ep.topic\r\n        FROM exam_predictions ep\r\n        WHERE ep.subject = p_subject AND ep.year = p_year\r\n    LOOP\r\n        -- Check if student has a mastered attempt for this topic (score >= 70)\r\n        -- Using direct topic matching\r\n        SELECT qa.topic, qa.score INTO v_quiz_topic, v_quiz_score\r\n        FROM quiz_attempts qa\r\n        WHERE qa.user_id = p_user_id \r\n            AND qa.subject = p_subject\r\n            AND (qa.topic = v_predicted_topic\r\n                 OR qa.topic ILIKE '%' || SPLIT_PART(v_predicted_topic, ' ', 1) || '%'\r\n                 OR v_predicted_topic ILIKE '%' || qa.topic || '%')\r\n            AND qa.score >= 70\r\n        LIMIT 1;\r\n        \r\n        IF FOUND THEN\r\n            v_mastered_count := v_mastered_count + 1;\r\n        ELSE\r\n            v_weak_topics := v_weak_topics || v_predicted_topic;\r\n        END IF;\r\n    END LOOP;\r\n    \r\n    RETURN QUERY\r\n    SELECT \r\n        ROUND((v_mastered_count * 100.0) / v_total_topics, 2),\r\n        v_mastered_count,\r\n        v_total_topics,\r\n        v_weak_topics;\r\nEND;\r\n"
+  },
+  {
+    "proname": "get_knowledge_gap_score",
+    "prosrc": "\r\nDECLARE\r\n    v_total_prerequisites INTEGER;\r\n    v_mastered_prerequisites INTEGER := 0;\r\n    v_prereq_record RECORD;\r\nBEGIN\r\n    -- Get all prerequisites for this topic\r\n    SELECT COUNT(*) INTO v_total_prerequisites\r\n    FROM topic_prerequisites\r\n    WHERE subject = p_subject AND topic = p_topic;\r\n    \r\n    -- If no prerequisites, return 1.0 (fully ready)\r\n    IF v_total_prerequisites = 0 THEN\r\n        RETURN 1.0;\r\n    END IF;\r\n    \r\n    -- Check each prerequisite\r\n    FOR v_prereq_record IN\r\n        SELECT prerequisite_topic\r\n        FROM topic_prerequisites\r\n        WHERE subject = p_subject AND topic = p_topic\r\n    LOOP\r\n        -- Check if student has mastered this prerequisite (score >= 70)\r\n        IF EXISTS (\r\n            SELECT 1 FROM quiz_attempts qa\r\n            WHERE qa.user_id = p_user_id\r\n                AND qa.subject = p_subject\r\n                AND qa.topic ILIKE '%' || v_prereq_record.prerequisite_topic || '%'\r\n                AND qa.score >= 70\r\n        ) THEN\r\n            v_mastered_prerequisites := v_mastered_prerequisites + 1;\r\n        END IF;\r\n    END LOOP;\r\n    \r\n    -- Return ratio of mastered prerequisites\r\n    RETURN v_mastered_prerequisites::NUMERIC / v_total_prerequisites;\r\nEND;\r\n"
+  },
+  {
+    "proname": "get_learning_path",
+    "prosrc": "\r\nBEGIN\r\n    RETURN QUERY\r\n    WITH all_topics AS (\r\n        SELECT DISTINCT topic FROM exam_predictions WHERE subject = p_subject\r\n        UNION\r\n        SELECT DISTINCT topic FROM topic_prerequisites WHERE subject = p_subject\r\n    ),\r\n    topic_priorities AS (\r\n        SELECT \r\n            at.topic,\r\n            COALESCE(ep.probability, 0.5) AS exam_priority,\r\n            COALESCE(get_knowledge_gap_score(p_user_id, p_subject, at.topic), 0) AS knowledge_gap,\r\n            CASE WHEN EXISTS (\r\n                SELECT 1 FROM quiz_attempts qa\r\n                WHERE qa.user_id = p_user_id \r\n                    AND qa.subject = p_subject\r\n                    AND qa.topic ILIKE '%' || at.topic || '%'\r\n                    AND qa.score >= 70\r\n            ) THEN TRUE ELSE FALSE END AS mastered\r\n        FROM all_topics at\r\n        LEFT JOIN exam_predictions ep ON ep.subject = p_subject AND ep.topic = at.topic\r\n    )\r\n    SELECT \r\n        tp.topic,\r\n        tp.mastered,\r\n        ROUND((tp.exam_priority * 0.6 + (1 - tp.knowledge_gap) * 0.4) * 100, 2) AS priority_score,\r\n        CASE \r\n            WHEN tp.mastered THEN 'Already mastered ✓'\r\n            WHEN tp.knowledge_gap < 0.5 THEN 'Complete prerequisites first'\r\n            WHEN tp.exam_priority > 0.75 THEN 'High priority - Study soon'\r\n            WHEN tp.exam_priority > 0.5 THEN 'Medium priority'\r\n            ELSE 'Low priority'\r\n        END AS recommendation\r\n    FROM topic_priorities tp\r\n    ORDER BY tp.mastered ASC, priority_score DESC;\r\nEND;\r\n"
+  },
+  {
+    "proname": "get_prerequisite_chain",
+    "prosrc": "\r\nBEGIN\r\n    RETURN QUERY\r\n    WITH RECURSIVE prereq_tree AS (\r\n        -- Base case: direct prerequisites\r\n        SELECT \r\n            tp.prerequisite_topic AS prereq_topic,\r\n            1 AS depth_level\r\n        FROM topic_prerequisites tp\r\n        WHERE tp.subject = p_subject AND tp.topic = p_topic\r\n        \r\n        UNION ALL\r\n        \r\n        -- Recursive case: prerequisites of prerequisites\r\n        SELECT \r\n            tp.prerequisite_topic AS prereq_topic,\r\n            pt.depth_level + 1 AS depth_level\r\n        FROM topic_prerequisites tp\r\n        INNER JOIN prereq_tree pt ON tp.topic = pt.prereq_topic\r\n        WHERE tp.subject = p_subject\r\n    )\r\n    SELECT DISTINCT prereq_topic, depth_level\r\n    FROM prereq_tree\r\n    ORDER BY depth_level DESC, prereq_topic;\r\nEND;\r\n"
+  },
+  {
+    "proname": "get_first_unmastered_prerequisite",
+    "prosrc": "\r\nDECLARE\r\n    v_prereq_record RECORD;\r\nBEGIN\r\n    -- Get prerequisites ordered by depth (deepest first)\r\n    FOR v_prereq_record IN\r\n        SELECT prerequisite_topic_name\r\n        FROM get_prerequisite_chain(p_subject, p_topic)\r\n        ORDER BY level DESC\r\n    LOOP\r\n        -- Check if this prerequisite is mastered\r\n        IF NOT EXISTS (\r\n            SELECT 1 FROM quiz_attempts qa\r\n            WHERE qa.user_id = p_user_id\r\n                AND qa.subject = p_subject\r\n                AND qa.topic ILIKE '%' || v_prereq_record.prerequisite_topic_name || '%'\r\n                AND qa.score >= 70\r\n        ) THEN\r\n            RETURN v_prereq_record.prerequisite_topic_name;\r\n        END IF;\r\n    END LOOP;\r\n    \r\n    RETURN NULL; -- All prerequisites mastered\r\nEND;\r\n"
+  },
+  {
+    "proname": "orchestrator",
+    "prosrc": "\r\nDECLARE\r\n    v_exam_priority NUMERIC;\r\n    v_knowledge_gap NUMERIC;\r\n    v_emotion_modifier NUMERIC;\r\n    v_composite_score NUMERIC;\r\n    v_unmastered_prerequisite TEXT;\r\n    v_current_theta NUMERIC;\r\n    v_result JSON;\r\nBEGIN\r\n    -- Get current theta for difficulty adjustment\r\n    SELECT COALESCE(theta, 0.0) INTO v_current_theta\r\n    FROM quiz_attempts\r\n    WHERE user_id = p_user_id AND subject = p_subject\r\n    ORDER BY created_at DESC\r\n    LIMIT 1;\r\n    \r\n    -- 1. Get exam priority score (weight: 0.4)\r\n    SELECT COALESCE(probability, 0.5) INTO v_exam_priority\r\n    FROM exam_predictions\r\n    WHERE subject = p_subject AND topic = p_target_topic\r\n    LIMIT 1;\r\n    \r\n    -- 2. Get knowledge gap score (weight: 0.4)\r\n    v_knowledge_gap := get_knowledge_gap_score(p_user_id, p_subject, p_target_topic);\r\n    \r\n    -- 3. Get emotion modifier (weight: 0.2)\r\n    v_emotion_modifier := CASE p_emotion_state\r\n        WHEN 'frustrated' THEN -0.3\r\n        WHEN 'fatigued' THEN -0.2\r\n        ELSE 0.0\r\n    END;\r\n    \r\n    -- 4. Calculate composite score\r\n    v_composite_score := (v_exam_priority * 0.4) + (v_knowledge_gap * 0.4) + (v_emotion_modifier * 0.2);\r\n    \r\n    -- 5. Prerequisite gate check (if less than 50% prerequisites mastered)\r\n    IF v_knowledge_gap <= 0.5 THEN\r\n        v_unmastered_prerequisite := get_first_unmastered_prerequisite(p_user_id, p_subject, p_target_topic);\r\n        \r\n        v_result := json_build_object(\r\n            'action', 'fill_prerequisite',\r\n            'redirect_to', COALESCE(v_unmastered_prerequisite, p_target_topic),\r\n            'reason', format('Only %s%% of prerequisites mastered for %s', \r\n                           ROUND(v_knowledge_gap * 100, 0), p_target_topic),\r\n            'composite_score', ROUND(v_composite_score, 3),\r\n            'exam_priority', ROUND(v_exam_priority, 3),\r\n            'knowledge_gap', ROUND(v_knowledge_gap, 3),\r\n            'emotion_modifier', v_emotion_modifier,\r\n            'current_theta', ROUND(v_current_theta, 2),\r\n            'recommended_difficulty', \r\n                CASE WHEN v_current_theta < -1.0 THEN 'easy'\r\n                     WHEN v_current_theta < 1.0 THEN 'medium'\r\n                     ELSE 'hard'\r\n                END,\r\n            'emotion_state', p_emotion_state\r\n        );\r\n        \r\n        RETURN v_result;\r\n    END IF;\r\n    \r\n    -- 6. Proceed to topic\r\n    v_result := json_build_object(\r\n        'action', 'proceed',\r\n        'composite_score', ROUND(v_composite_score, 3),\r\n        'exam_priority', ROUND(v_exam_priority, 3),\r\n        'knowledge_gap', ROUND(v_knowledge_gap, 3),\r\n        'emotion_modifier', v_emotion_modifier,\r\n        'current_theta', ROUND(v_current_theta, 2),\r\n        'recommended_difficulty', \r\n            CASE WHEN v_current_theta < -1.0 THEN 'easy'\r\n                 WHEN v_current_theta < 1.0 THEN 'medium'\r\n                 ELSE 'hard'\r\n            END,\r\n        'emotion_state', p_emotion_state,\r\n        'encouragement_message', \r\n            CASE \r\n                WHEN p_emotion_state = 'frustrated' THEN '😊 চিন্তা করো না! তুমি পারবে! চলো আবার চেষ্টা করি! 💪'\r\n                WHEN p_emotion_state = 'fatigued' THEN '😴 একটু বিরতি নাও, তারপর আবার শুরু করো! 🌟'\r\n                ELSE '🚀 তুমি প্রস্তুত! চলো শুরু করি!'\r\n            END\r\n    );\r\n    \r\n    RETURN v_result;\r\nEND;\r\n"
+  },
+  {
+    "proname": "match_curriculum_chunks",
+    "prosrc": "\r\nBEGIN\r\n    RETURN QUERY\r\n    SELECT cc.id, cc.chunk_id, cc.content, cc.chunk_index, cc.metadata,\r\n           1 - (cc.embedding <=> query_embedding) AS similarity\r\n    FROM curriculum_chunks cc\r\n    WHERE cc.embedding IS NOT NULL\r\n      AND 1 - (cc.embedding <=> query_embedding) > match_threshold\r\n    ORDER BY cc.embedding <=> query_embedding\r\n    LIMIT match_count;\r\nEND;\r\n"
+  }
+]
