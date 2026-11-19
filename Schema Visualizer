@@ -1,0 +1,194 @@
+-- WARNING: This schema is for context only and is not meant to be run.
+-- Table order and constraints may not be valid for execution.
+
+CREATE TABLE public.profiles (
+  id uuid NOT NULL DEFAULT uuid_generate_v4(),
+  name text NOT NULL DEFAULT 'Student'::text,
+  class text NOT NULL DEFAULT 'SSC'::text,
+  personality text DEFAULT 'curious_explorer'::text,
+  avatar_initials text DEFAULT 'ST'::text,
+  streak_days integer DEFAULT 0,
+  xp_total integer DEFAULT 0,
+  level integer DEFAULT 1,
+  created_at timestamp with time zone DEFAULT now(),
+  updated_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT profiles_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.subjects (
+  id uuid NOT NULL DEFAULT uuid_generate_v4(),
+  name text NOT NULL,
+  name_bn text NOT NULL,
+  icon text,
+  color text,
+  total_chapters integer DEFAULT 0,
+  curriculum text DEFAULT 'NCTB'::text,
+  class text DEFAULT 'SSC'::text,
+  CONSTRAINT subjects_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.progress (
+  id uuid NOT NULL DEFAULT uuid_generate_v4(),
+  user_id uuid,
+  subject_id uuid,
+  pct integer DEFAULT 0 CHECK (pct >= 0 AND pct <= 100),
+  ai_score integer DEFAULT 0 CHECK (ai_score >= 0 AND ai_score <= 100),
+  updated_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT progress_pkey PRIMARY KEY (id),
+  CONSTRAINT progress_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.profiles(id),
+  CONSTRAINT progress_subject_id_fkey FOREIGN KEY (subject_id) REFERENCES public.subjects(id)
+);
+CREATE TABLE public.quiz_attempts (
+  id uuid NOT NULL DEFAULT uuid_generate_v4(),
+  user_id uuid,
+  subject text NOT NULL,
+  topic text NOT NULL,
+  score integer DEFAULT 0,
+  total_q integer DEFAULT 0,
+  xp_earned integer DEFAULT 0,
+  theta numeric DEFAULT 0.0,
+  created_at timestamp with time zone DEFAULT now(),
+  emotion_state text DEFAULT 'focused'::text,
+  CONSTRAINT quiz_attempts_pkey PRIMARY KEY (id),
+  CONSTRAINT quiz_attempts_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.profiles(id)
+);
+CREATE TABLE public.chat_history (
+  id uuid NOT NULL DEFAULT uuid_generate_v4(),
+  user_id uuid,
+  role text NOT NULL CHECK (role = ANY (ARRAY['user'::text, 'assistant'::text])),
+  content text NOT NULL,
+  subject text,
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT chat_history_pkey PRIMARY KEY (id),
+  CONSTRAINT chat_history_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.profiles(id)
+);
+CREATE TABLE public.study_activity (
+  id uuid NOT NULL DEFAULT uuid_generate_v4(),
+  user_id uuid,
+  study_date date NOT NULL,
+  minutes integer DEFAULT 0,
+  CONSTRAINT study_activity_pkey PRIMARY KEY (id),
+  CONSTRAINT study_activity_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.profiles(id)
+);
+CREATE TABLE public.provenance (
+  id uuid NOT NULL DEFAULT uuid_generate_v4(),
+  user_id uuid,
+  data_sources ARRAY DEFAULT '{}'::text[],
+  ai_models ARRAY DEFAULT '{}'::text[],
+  frameworks ARRAY DEFAULT '{}'::text[],
+  ide text,
+  deployment text,
+  context_files ARRAY DEFAULT '{}'::text[],
+  rai_practices text,
+  rai_score integer DEFAULT 0,
+  mcp_servers jsonb DEFAULT '[]'::jsonb,
+  tools_exposed ARRAY DEFAULT '{}'::text[],
+  permissions jsonb DEFAULT '{}'::jsonb,
+  updated_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT provenance_pkey PRIMARY KEY (id),
+  CONSTRAINT provenance_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.profiles(id)
+);
+CREATE TABLE public.prompts (
+  id uuid NOT NULL DEFAULT uuid_generate_v4(),
+  user_id uuid,
+  title text NOT NULL,
+  content text NOT NULL,
+  type text DEFAULT 'system'::text,
+  tag text,
+  is_active boolean DEFAULT false,
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT prompts_pkey PRIMARY KEY (id),
+  CONSTRAINT prompts_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.profiles(id)
+);
+CREATE TABLE public.audit_log (
+  id uuid NOT NULL DEFAULT uuid_generate_v4(),
+  user_id uuid,
+  action text NOT NULL,
+  detail text,
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT audit_log_pkey PRIMARY KEY (id),
+  CONSTRAINT audit_log_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.profiles(id)
+);
+CREATE TABLE public.curriculum_chunks (
+  id bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  chunk_id text UNIQUE,
+  content text,
+  embedding USER-DEFINED,
+  metadata jsonb DEFAULT '{}'::jsonb,
+  created_at timestamp with time zone DEFAULT now(),
+  chunk_index integer,
+  CONSTRAINT curriculum_chunks_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.career_pathways (
+  id uuid NOT NULL DEFAULT uuid_generate_v4(),
+  title text NOT NULL UNIQUE,
+  title_bn text,
+  description text NOT NULL,
+  description_bn text,
+  required_subjects ARRAY NOT NULL DEFAULT '{}'::text[],
+  recommended_level integer DEFAULT 1,
+  skills ARRAY DEFAULT '{}'::text[],
+  icon text,
+  color text,
+  average_salary text,
+  education_path ARRAY DEFAULT '{}'::text[],
+  job_roles ARRAY DEFAULT '{}'::text[],
+  is_active boolean DEFAULT true,
+  created_at timestamp with time zone DEFAULT now(),
+  updated_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT career_pathways_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.exam_predictions (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  subject text NOT NULL,
+  topic text NOT NULL,
+  probability double precision,
+  recommendation text,
+  year integer,
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT exam_predictions_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.exam_question_data (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  subject text NOT NULL,
+  topic text NOT NULL,
+  year integer NOT NULL,
+  appeared boolean DEFAULT false,
+  chapter_weight integer DEFAULT 3,
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT exam_question_data_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.topic_prerequisites (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  subject text NOT NULL,
+  topic text NOT NULL,
+  prerequisite_topic text NOT NULL,
+  created_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT topic_prerequisites_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.orchestrator_test_results (
+  profile text,
+  topic text,
+  emotion text,
+  result json
+);
+CREATE TABLE public.predictor_validation (
+  id integer NOT NULL DEFAULT nextval('predictor_validation_id_seq'::regclass),
+  subject text,
+  actual_topics ARRAY,
+  predicted_topics ARRAY,
+  hit_count integer,
+  precision_at_10 numeric,
+  validation_date timestamp with time zone DEFAULT now(),
+  CONSTRAINT predictor_validation_pkey PRIMARY KEY (id)
+);
+CREATE TABLE public.badges (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  student_id uuid NOT NULL,
+  badge_name text NOT NULL,
+  badge_description text,
+  criteria_met text,
+  awarded_at timestamp with time zone DEFAULT now(),
+  icon text,
+  color text,
+  CONSTRAINT badges_pkey PRIMARY KEY (id),
+  CONSTRAINT badges_student_id_fkey FOREIGN KEY (student_id) REFERENCES public.profiles(id)
+);
